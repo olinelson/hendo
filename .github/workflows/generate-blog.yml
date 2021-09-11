@@ -1,5 +1,9 @@
 name: Generate markdown
-on: [push]
+on: 
+  push:
+  schedule:
+    - cron: */5 * * * *
+
 jobs:
   Generate-Markdown:
     runs-on: ubuntu-latest
