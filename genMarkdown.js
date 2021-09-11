@@ -1,15 +1,20 @@
 const { Client } = require("@notionhq/client");
 const fs = require("fs");
-const util = require("util");
 const path = require("path");
 
+const yargs = require("yargs/yargs");
+const { hideBin } = require("yargs/helpers");
+const { NOTION_DATABASE_ID, NOTION_API_KEY } = yargs(
+  hideBin(process.argv)
+).argv;
+
 const notion = new Client({
-  auth: "",
+  auth: NOTION_API_KEY,
 });
 
 async function getBlogHome() {
   const res = await notion.databases.query({
-    database_id: "ac9b293913dd464294b97dcd0efb4230",
+    database_id: NOTION_DATABASE_ID,
   });
 
   return res.results;

@@ -10,13 +10,13 @@ jobs:
           node-version: "14"
           cache: "npm"
       - run: npm install
-      - run: npm run gen
+      - run: npm run genMarkdown --NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID}} --NOTION_API_KEY=${{ secrets.NOTION_API_KEY}}
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git commit -m "update data" -a
+          git commit -m "generate markdown" -a
 
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
