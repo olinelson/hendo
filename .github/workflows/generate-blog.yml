@@ -1,7 +1,7 @@
 name: Generate markdown
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Generate-Markdown:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,4 +22,4 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.TOKEN }}
-          branch: main
+          branch: master
