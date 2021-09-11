@@ -1,8 +1,8 @@
 name: Generate markdown
-on: 
+on:
   push:
   schedule:
-    - cron: */5 * * * *
+    - cron: "*/5 * * * *"
 
 jobs:
   Generate-Markdown:
