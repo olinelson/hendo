@@ -15,7 +15,7 @@ layout: "../../layouts/BlogPost.astro"
 
 
 
-![Cool photo](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/edf4fc2a-154e-4209-82e7-93b0851a9897/lite.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210912%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210912T064627Z&X-Amz-Expires=3600&X-Amz-Signature=12a6258acead57338e99f444e53a0ba750dc703c72398b689592ee60efe8643f&X-Amz-SignedHeaders=host "Cool photo")
+![Cool photo](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/edf4fc2a-154e-4209-82e7-93b0851a9897/lite.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210912%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210912T065329Z&X-Amz-Expires=3600&X-Amz-Signature=924839ad9be121adc8640631e3992be1e4f3bdbd2815f7b1c6173401ddb5fd27&X-Amz-SignedHeaders=host "Cool photo")
 
 
 
