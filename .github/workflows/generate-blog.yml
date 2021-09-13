@@ -19,6 +19,9 @@ jobs:
       - name: Generate markdown step
         id: gen-markdown
         uses: olinelson/notion-to-markdown@v1.4
+        with:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
 
       - name: commit files
         run: |
