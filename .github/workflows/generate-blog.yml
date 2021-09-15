@@ -18,7 +18,7 @@ jobs:
       # - run: node genMarkdown.js --NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID}} --NOTION_API_KEY=${{ secrets.NOTION_API_KEY}}
       - name: Generate markdown step
         id: gen-markdown
-        uses: olinelson/notion-to-markdown@v1.93
+        uses: olinelson/notion-to-markdown@v1.94
         with:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
