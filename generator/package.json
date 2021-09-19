@@ -1,0 +1,23 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/typescript/bin/tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "@notionhq/client": "^0.3.2",
+    "typescript": "^4.4.3",
+    "yargs": "^17.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.2",
+    "@types/yargs": "^17.0.2"
+  }
+}
