@@ -20,14 +20,33 @@ import * as core from "@actions/core";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 
+function updatePagePublishDate(notion: Client, p: Page) {
+  const now = new Date();
+  notion.pages.update({
+    page_id: p.id,
+    archived: false,
+    properties: {
+      Published: {
+        type: "date",
+        date: {
+          start: now.toISOString().split("T")[0],
+        },
+      },
+    },
+  });
+}
+
 function parseRichText(rt: RichText): string {
   const { type } = rt;
 
   if (type === "text") {
     const { annotations, text } = rt as RichTextText;
     const content = text.content.trim();
+    console.log({ content });
     const url = text.link?.url;
     const quote = content.startsWith("^") ? content.substring(0, 1) : undefined;
+
+    if (content.length < 1) return content;
 
     if (url) {
       return `[${content}](${url})`;
@@ -45,6 +64,14 @@ function parseRichText(rt: RichText): string {
       return `~~${content}~~`;
     }
 
+    if (annotations.underline) {
+      return `__${content}__`;
+    }
+
+    if (annotations.strikethrough) {
+      return `~~${content}~~`;
+    }
+
     if (annotations.code) {
       const tag = "'`'";
       return `${tag}${content}${tag}`;
@@ -53,6 +80,8 @@ function parseRichText(rt: RichText): string {
     if (quote) {
       return `> ' ${content.substring(2)}`;
     }
+
+    return content;
   }
 
   return "";
@@ -114,13 +143,16 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
   });
 
   for (const block of page_blocks.results) {
+    // console.log({ block });
     switch (block.type) {
       case "paragraph":
         text += "\n";
         for (const textBlock of block.paragraph.text) {
-          text += `${parseRichText(textBlock)} `;
+          const rich = `${parseRichText(textBlock)} `;
+          console.log({ rich });
+          text += rich;
         }
-        text += "\n";
+        // text += "\n";
         break;
       case "heading_1":
         text += `\n#${block.heading_1.text[0].plain_text}\n`;
@@ -147,7 +179,7 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
   }
 
   const fileName = `${parsedProps.Name || "untitled"}.md`;
-  const dirPath = path.join(__dirname, "/tmp/posts");
+  const dirPath = path.join(__dirname, "../../astro/src/pages/posts");
 
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
@@ -175,6 +207,12 @@ export async function genMarkdown(
     do {
       const res: DatabasesQueryResponse = await notion.databases.query({
         database_id,
+        filter: {
+          property: "Status",
+          select: {
+            equals: "Publish",
+          },
+        },
         start_cursor,
       });
 
@@ -183,6 +221,7 @@ export async function genMarkdown(
       for (const p of pages) {
         const createdFileName = await createMarkdownFile(notion, p);
         filesCreated.push(createdFileName);
+        await updatePagePublishDate(notion, p);
       }
 
       if (res.has_more && res.next_cursor) {
@@ -211,10 +250,4 @@ export async function genMarkdown(
 const args = yargs(hideBin(process.argv)).argv;
 const { NOTION_API_KEY, NOTION_DATABASE_ID } = args as any;
 
-// console.log("RUNNING");
-console.log(NOTION_API_KEY, NOTION_DATABASE_ID);
-// console.log(args);
-
 genMarkdown(NOTION_API_KEY, NOTION_DATABASE_ID);
-
-// https://www.notion.so/ac9b293913dd464294b97dcd0efb4230?v=f9a5d6fa8df145d29ff9601c0288e774

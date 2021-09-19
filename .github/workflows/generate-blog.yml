@@ -14,14 +14,8 @@ jobs:
         with:
           node-version: "14"
           cache: "npm"
-      - run: npm install
-      # - run: node genMarkdown.js --NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID}} --NOTION_API_KEY=${{ secrets.NOTION_API_KEY}}
-      - name: Generate markdown step
-        id: gen-markdown
-        uses: olinelson/notion-to-markdown@v1.96
-        with:
-          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+      - run: cd generator && npm install
+      - run: node dist/genMarkdown.js --NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID}} --NOTION_API_KEY=${{ secrets.NOTION_API_KEY}}
 
       - name: commit files
         run: |

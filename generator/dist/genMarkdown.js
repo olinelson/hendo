@@ -66,14 +66,32 @@ var path_1 = __importDefault(require("path"));
 var core = __importStar(require("@actions/core"));
 var yargs_1 = __importDefault(require("yargs/yargs"));
 var helpers_1 = require("yargs/helpers");
+function updatePagePublishDate(notion, p) {
+    var now = new Date();
+    notion.pages.update({
+        page_id: p.id,
+        archived: false,
+        properties: {
+            Published: {
+                type: "date",
+                date: {
+                    start: now.toISOString().split("T")[0],
+                },
+            },
+        },
+    });
+}
 function parseRichText(rt) {
     var _a;
     var type = rt.type;
     if (type === "text") {
         var _b = rt, annotations = _b.annotations, text = _b.text;
         var content = text.content.trim();
+        console.log({ content: content });
         var url = (_a = text.link) === null || _a === void 0 ? void 0 : _a.url;
         var quote = content.startsWith("^") ? content.substring(0, 1) : undefined;
+        if (content.length < 1)
+            return content;
         if (url) {
             return "[" + content + "](" + url + ")";
         }
@@ -86,6 +104,12 @@ function parseRichText(rt) {
         if (annotations.strikethrough) {
             return "~~" + content + "~~";
         }
+        if (annotations.underline) {
+            return "__" + content + "__";
+        }
+        if (annotations.strikethrough) {
+            return "~~" + content + "~~";
+        }
         if (annotations.code) {
             var tag = "'`'";
             return "" + tag + content + tag;
@@ -93,6 +117,7 @@ function parseRichText(rt) {
         if (quote) {
             return "> ' " + content.substring(2);
         }
+        return content;
     }
     return "";
 }
@@ -127,7 +152,7 @@ function generateFrontMatter(customFrontMatter) {
 }
 function createMarkdownFile(notion, page) {
     return __awaiter(this, void 0, void 0, function () {
-        var parsedProps, text, page_blocks, _i, _a, block, _b, _c, textBlock, image, caption, url, fileName, dirPath;
+        var parsedProps, text, page_blocks, _i, _a, block, _b, _c, textBlock, rich, image, caption, url, fileName, dirPath;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -146,14 +171,17 @@ function createMarkdownFile(notion, page) {
                     page_blocks = _d.sent();
                     for (_i = 0, _a = page_blocks.results; _i < _a.length; _i++) {
                         block = _a[_i];
+                        // console.log({ block });
                         switch (block.type) {
                             case "paragraph":
                                 text += "\n";
                                 for (_b = 0, _c = block.paragraph.text; _b < _c.length; _b++) {
                                     textBlock = _c[_b];
-                                    text += parseRichText(textBlock) + " ";
+                                    rich = parseRichText(textBlock) + " ";
+                                    console.log({ rich: rich });
+                                    text += rich;
                                 }
-                                text += "\n";
+                                // text += "\n";
                                 break;
                             case "heading_1":
                                 text += "\n#" + block.heading_1.text[0].plain_text + "\n";
@@ -178,7 +206,7 @@ function createMarkdownFile(notion, page) {
                         }
                     }
                     fileName = (parsedProps.Name || "untitled") + ".md";
-                    dirPath = path_1.default.join(__dirname, "/tmp/posts");
+                    dirPath = path_1.default.join(__dirname, "../../astro/src/pages/posts");
                     if (!fs_1.default.existsSync(dirPath)) {
                         fs_1.default.mkdirSync(dirPath, { recursive: true });
                     }
@@ -202,10 +230,16 @@ function genMarkdown(notionApiKey, database_id) {
                     filesCreated = [];
                     _a.label = 1;
                 case 1:
-                    _a.trys.push([1, 10, , 11]);
+                    _a.trys.push([1, 11, , 12]);
                     _a.label = 2;
                 case 2: return [4 /*yield*/, notion.databases.query({
                         database_id: database_id,
+                        filter: {
+                            property: "Status",
+                            select: {
+                                equals: "Publish",
+                            },
+                        },
                         start_cursor: start_cursor,
                     })];
                 case 3:
@@ -214,33 +248,36 @@ function genMarkdown(notionApiKey, database_id) {
                     _i = 0, pages_1 = pages;
                     _a.label = 4;
                 case 4:
-                    if (!(_i < pages_1.length)) return [3 /*break*/, 7];
+                    if (!(_i < pages_1.length)) return [3 /*break*/, 8];
                     p = pages_1[_i];
                     return [4 /*yield*/, createMarkdownFile(notion, p)];
                 case 5:
                     createdFileName = _a.sent();
                     filesCreated.push(createdFileName);
-                    _a.label = 6;
+                    return [4 /*yield*/, updatePagePublishDate(notion, p)];
                 case 6:
+                    _a.sent();
+                    _a.label = 7;
+                case 7:
                     _i++;
                     return [3 /*break*/, 4];
-                case 7:
+                case 8:
                     if (res.has_more && res.next_cursor) {
                         hasMore = true;
                         start_cursor = res.next_cursor;
                     }
-                    _a.label = 8;
-                case 8:
-                    if (hasMore) return [3 /*break*/, 2];
                     _a.label = 9;
                 case 9:
+                    if (hasMore) return [3 /*break*/, 2];
+                    _a.label = 10;
+                case 10:
                     result = {
                         success: true,
                         filesCreated: filesCreated,
                     };
                     core.debug(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
-                case 10:
+                case 11:
                     error_1 = _a.sent();
                     result = {
                         success: false,
@@ -249,7 +286,7 @@ function genMarkdown(notionApiKey, database_id) {
                     };
                     core.error(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
-                case 11: return [2 /*return*/];
+                case 12: return [2 /*return*/];
             }
         });
     });
