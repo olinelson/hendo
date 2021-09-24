@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./docs
+        working-directory: ./astro
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -60,7 +60,7 @@ jobs:
 
       # Push to your pages repo
       - name: Push to pages repo
-        uses: cpina/github-action-push-to-another-repository@master
+        uses: cpina/github-action-push-to-another-repository@gh-pages
         env:
           API_TOKEN_GITHUB: ${{ secrets.TOKEN }}
         with:
