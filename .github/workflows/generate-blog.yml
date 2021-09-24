@@ -3,10 +3,12 @@ env:
   deployToRepo: hendo
 
 
-name: Generate markdown
+name: Generate markdown and publish
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
   schedule:
     - cron: "*/5 * * * *"
 
