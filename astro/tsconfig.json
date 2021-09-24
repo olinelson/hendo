@@ -1,7 +1,0 @@
-{
-  "moduleResolution": "node",
-    "compilerOptions": {
-      "module": "ES2015",
-      "target": "es5"
-    },
-}
