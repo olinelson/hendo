@@ -14,12 +14,12 @@ jobs:
         with:
           node-version: "14"
           cache: "npm"
+      - run: npm install
         working-directory: ./generator
-        run: npm install
+      - run: node dist/genMarkdown.js --NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID}} --NOTION_API_KEY=${{ secrets.NOTION_API_KEY}}
         working-directory: ./generator
-        run: node dist/genMarkdown.js --NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID}} --NOTION_API_KEY=${{ secrets.NOTION_API_KEY}}
       - name: commit files
-        run: |
+      - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
