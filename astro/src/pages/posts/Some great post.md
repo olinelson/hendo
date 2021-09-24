@@ -1,11 +1,11 @@
 ---
 layout: "../../layouts/BlogPost.astro"
-Name: Draft 2
-Description: 
+Name: Some great post
+Description: Description
 Published: 2021-09-24
-Author: 
+Author: Olaf Olafson
 HeroImageDescription: 
 
 ---
 
-This is a draft 
+This is a great post 
