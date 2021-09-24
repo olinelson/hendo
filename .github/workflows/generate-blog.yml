@@ -1,6 +1,6 @@
 env:
   githubEmail: oliver.nelson@icloud.com
-  deployToRepo: olinelson.github.io/hendo/
+  deployToRepo: hendo
 
 
 name: Generate markdown
