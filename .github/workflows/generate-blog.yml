@@ -8,6 +8,9 @@ on:
 jobs:
   Generate-Markdown:
     runs-on: ubuntu-latest
+    defaults:
+        run:
+          working-directory: ./generator
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
