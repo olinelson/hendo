@@ -2,7 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 Name: Draft 2
 Description: 
-Published: 
+Published: 2021-09-19
 Author: 
 HeroImageDescription: 
 
