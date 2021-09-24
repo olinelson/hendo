@@ -1,6 +1,6 @@
 env:
   githubEmail: oliver.nelson@icloud.com
-  deployToRepo: <NAME OF REPO TO DEPLOY TO (E.G. <YOUR USERNAME>.github.io)>
+  deployToRepo: olinelson.github.io/hendo/
 
 
 name: Generate markdown
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./astro
+        working-directory: ./docs
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
