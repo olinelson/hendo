@@ -60,7 +60,7 @@ jobs:
 
       # Push to your pages repo
       - name: Push to pages repo
-        uses: cpina/github-action-push-to-another-repository@gh-pages
+        uses: cpina/github-action-push-to-another-repository@master
         env:
           API_TOKEN_GITHUB: ${{ secrets.TOKEN }}
         with:
