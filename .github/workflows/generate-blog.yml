@@ -33,3 +33,35 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN }}
           branch: master
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./astro
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Install dependencies with npm
+      - name: Install dependencies
+        run: npm ci
+
+      # Build the project and add .nojekyll file to supress default behaviour
+      - name: Build
+        run: |
+          npm run build
+          touch ./dist/.nojekyll
+
+      # Push to your pages repo
+      - name: Push to pages repo
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.TOKEN }}
+        with:
+          source-directory: 'dist'
+          destination-github-username: ${{ github.actor }}
+          destination-repository-name: ${{ env.deployToRepo }}
+          user-email: ${{ env.githubEmail }}
+          commit-message: Deploy ORIGIN_COMMIT
+          target-branch: gh-pages
