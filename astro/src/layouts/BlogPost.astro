@@ -1,7 +1,6 @@
 ---
 import { Markdown } from 'astro/components';
 import BaseHead from '../components/BaseHead.astro';
-import BlogHeader from '../components/BlogHeader.astro';
 import BlogPost from '../components/BlogPost.astro';
 
 const {content} = Astro.props;
@@ -11,11 +10,9 @@ const {title, description, publishDate, author, heroImage, permalink, alt} = con
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
     <!-- <link rel="stylesheet" href="/blog.css" /> -->
-     <!-- <link rel="stylesheet" href="/global.css"> -->
   </head>
 
   <body>
-    <BlogHeader />
     <BlogPost title={title} author={author} heroImage={heroImage} publishDate={publishDate} alt={alt}>
       <slot />
     </BlogPost>

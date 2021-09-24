@@ -12,4 +12,7 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
   buildOptions: {
     site: "https://olinelson.github.io/hendo/",
   },
+  devOptions: {
+    tailwindConfig: "./tailwind.config.js",
+  },
 });

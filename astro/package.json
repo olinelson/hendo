@@ -11,6 +11,7 @@
   "devDependencies": {
     "@astrojs/renderer-svelte": "^0.1.1",
     "astro": "^0.20.4",
+    "tailwindcss": "^2.2.15",
     "typescript": "^4.4.2"
   },
   "dependencies": {
