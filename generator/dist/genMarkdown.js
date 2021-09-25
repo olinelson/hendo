@@ -68,7 +68,7 @@ var yargs_1 = __importDefault(require("yargs/yargs"));
 var helpers_1 = require("yargs/helpers");
 function updateLog(result) {
     var now = new Date();
-    var text = "\n  #### " + now.toDateString() + " " + now.toTimeString() + "\n  Successfully run: " + result.success + "\n  Files created: " + result.filesCreated.map(function (f) { return "\t - " + f; }).join("\n") + "\n  ";
+    var text = "\n  #### " + now.toDateString() + " " + now.toTimeString() + "\n  Successfully run: " + result.success + "\n  Files created: \n  " + result.filesCreated.map(function (f) { return "\t - " + f; }).join("\n") + "\n  ";
     fs_1.default.appendFileSync("./log.md", text);
 }
 function updatePagePublishDate(notion, p) {
