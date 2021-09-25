@@ -26,9 +26,9 @@ function updateLog(result: { success: boolean; filesCreated: string[] }) {
   #### ${now.toDateString()} ${now.toTimeString()}
   Successfully run: ${result.success}
   Files created:
-    ${result.filesCreated.map((f) => `- ${f}`).join("\n")}
+    ${result.filesCreated.map((f) => `- ${f}`).join("\n\t")}
   `;
-  fs.appendFileSync("../log.md", text);
+  fs.appendFileSync("./log.md", text);
 }
 
 function updatePagePublishDate(notion: Client, p: Page) {
