@@ -2,7 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 Name: Some great post
 Description: Description
-Published: 2021-09-24
+Published: 2021-09-25
 Author: Olaf Olafson
 HeroImageDescription: 
 
