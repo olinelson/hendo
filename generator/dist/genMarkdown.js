@@ -66,6 +66,11 @@ var path_1 = __importDefault(require("path"));
 var core = __importStar(require("@actions/core"));
 var yargs_1 = __importDefault(require("yargs/yargs"));
 var helpers_1 = require("yargs/helpers");
+function updateLog(result) {
+    var now = new Date();
+    var text = "\n  #### " + now.toDateString + " " + now.toTimeString() + "\n  Successfully run: " + result.success + "\n  Files created:\n    " + result.filesCreated.map(function (f) { return "- " + f + "\n"; }) + "\n  ";
+    fs_1.default.appendFileSync("../log.md", text);
+}
 function updatePagePublishDate(notion, p) {
     var now = new Date();
     notion.pages.update({
@@ -275,6 +280,7 @@ function genMarkdown(notionApiKey, database_id) {
                         success: true,
                         filesCreated: filesCreated,
                     };
+                    updateLog(result);
                     core.debug(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
                 case 11:
@@ -284,6 +290,7 @@ function genMarkdown(notionApiKey, database_id) {
                         filesCreated: filesCreated,
                         error: error_1,
                     };
+                    updateLog(result);
                     core.error(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
                 case 12: return [2 /*return*/];
@@ -294,8 +301,4 @@ function genMarkdown(notionApiKey, database_id) {
 exports.genMarkdown = genMarkdown;
 var args = (0, yargs_1.default)((0, helpers_1.hideBin)(process.argv)).argv;
 var _a = args, NOTION_API_KEY = _a.NOTION_API_KEY, NOTION_DATABASE_ID = _a.NOTION_DATABASE_ID;
-// console.log("RUNNING");
-console.log(NOTION_API_KEY, NOTION_DATABASE_ID);
-// console.log(args);
 genMarkdown(NOTION_API_KEY, NOTION_DATABASE_ID);
-// https://www.notion.so/ac9b293913dd464294b97dcd0efb4230?v=f9a5d6fa8df145d29ff9601c0288e774
