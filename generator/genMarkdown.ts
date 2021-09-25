@@ -25,8 +25,7 @@ function updateLog(result: { success: boolean; filesCreated: string[] }) {
   const text = `
   #### ${now.toDateString()} ${now.toTimeString()}
   Successfully run: ${result.success}
-  Files created:
-    ${result.filesCreated.map((f) => `- ${f}`).join("\n\t")}
+  Files created: ${result.filesCreated.map((f) => `\t - ${f}`).join("\n")}
   `;
   fs.appendFileSync("./log.md", text);
 }
