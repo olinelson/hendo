@@ -20,6 +20,17 @@ import * as core from "@actions/core";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 
+function updateLog(result: { success: boolean; filesCreated: string[] }) {
+  const now = new Date();
+  const text = `
+  #### ${now.toDateString} ${now.toTimeString()}
+  Successfully run: ${result.success}
+  Files created:
+    ${result.filesCreated.map((f) => `- ${f}\n`)}
+  `;
+  fs.appendFileSync("../log.md", text);
+}
+
 function updatePagePublishDate(notion: Client, p: Page) {
   const now = new Date();
   notion.pages.update({
@@ -234,6 +245,7 @@ export async function genMarkdown(
       success: true,
       filesCreated,
     };
+    updateLog(result);
     core.debug(JSON.stringify(result, undefined, 2));
     return result;
   } catch (error) {
@@ -242,6 +254,7 @@ export async function genMarkdown(
       filesCreated,
       error,
     };
+    updateLog(result);
     core.error(JSON.stringify(result, undefined, 2));
     return result;
   }
