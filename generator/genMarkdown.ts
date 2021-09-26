@@ -23,10 +23,10 @@ import { hideBin } from "yargs/helpers";
 function updateLog(result: { success: boolean; filesCreated: string[] }) {
   const now = new Date();
   const text =
-    `\n#### ${now.toDateString()} ${now.toTimeString()}\n` +
+    `\n\n#### ${now.toDateString()} ${now.toTimeString()}\n` +
     `Successfully run: ${result.success}\n` +
     `Files created:\n` +
-    `${result.filesCreated.map((f) => `\t - ${f}`).join("\n")}`;
+    `${result.filesCreated.map((f) => `  - ${f}`).join("\n")}`;
   fs.appendFileSync("./log.md", text);
 }
 
