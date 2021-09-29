@@ -2,7 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 Name: My first post
 Description: A great blog about stuff...
-Published: 2021-09-28
+Published: 2021-09-29
 Author: Olaf Olafson
 HeroImageDescription: Some pretty birds
 
