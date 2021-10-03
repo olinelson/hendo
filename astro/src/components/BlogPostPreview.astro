@@ -5,9 +5,9 @@ export interface Props {
 
 const { post } = Astro.props;
 ---
-<article class="post-preview">
+<article class="post-preview text-white">
   <header>
-    <h3 class="publish-date">{post.publishDate}</h3>
+    <h3 class="publish-date">{post.published}</h3>
     <a href={post.url}><h1 class="title">{post.title}</h1></a>
   </header>
   <main>

@@ -74,13 +74,13 @@ function updateLog(result) {
         ("" + result.filesCreated.map(function (f) { return "  - " + f; }).join("\n"));
     fs_1.default.appendFileSync("./log.md", text);
 }
-function updatePagePublishDate(notion, p) {
+function updatePageSyncDate(notion, p) {
     var now = new Date();
     notion.pages.update({
         page_id: p.id,
         archived: false,
         properties: {
-            Published: {
+            Synced: {
                 type: "date",
                 date: {
                     start: now.toISOString().split("T")[0],
@@ -262,7 +262,7 @@ function genMarkdown(notionApiKey, database_id) {
                 case 5:
                     createdFileName = _a.sent();
                     filesCreated.push(createdFileName);
-                    return [4 /*yield*/, updatePagePublishDate(notion, p)];
+                    return [4 /*yield*/, updatePageSyncDate(notion, p)];
                 case 6:
                     _a.sent();
                     _a.label = 7;

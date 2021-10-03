@@ -16,7 +16,7 @@
   <div
     style="background-image: url('{src}');"
     transition:fade={{ duration: 500 }}
-    class="hero"
+    class="hero grayscale"
   />
 {/if}
 

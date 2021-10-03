@@ -2,27 +2,26 @@
   import "../styles/global.css";
 </script>
 
-<div class="h-10 px-2 bg-white" id="nav">
+<div
+  class="h-10 px-2 fixed top-0 left-0 right-0 text-xl text-white  z-50 items-center"
+  id="nav"
+>
   <div class="">
-    <a href="/"> <h4>Nick Henderson</h4></a>
+    <a href="/"> <h4>nick henderson</h4></a>
   </div>
 
-  <div id="items" class="">
-    <a href="/bio">Bio</a>
-    <a href="/blog">Blog</a>
-    <a href="/music">Music</a>
-    <a href="/contact">Contact</a>
+  <div id="items" class=" justify-self-end">
+    <a href="/bio">bio</a>
+    <a href="/blog">blog</a>
+    <a href="/music">music</a>
+    <a href="/contact">contact</a>
   </div>
 </div>
 
 <style>
   #nav {
-    position: sticky;
-    top: 0;
-    width: 100vw;
     display: grid;
     grid-template-columns: auto 1fr;
-    align-items: center;
   }
   #items {
     justify-self: end;

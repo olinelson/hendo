@@ -30,13 +30,13 @@ function updateLog(result: { success: boolean; filesCreated: string[] }) {
   fs.appendFileSync("./log.md", text);
 }
 
-function updatePagePublishDate(notion: Client, p: Page) {
+function updatePageSyncDate(notion: Client, p: Page) {
   const now = new Date();
   notion.pages.update({
     page_id: p.id,
     archived: false,
     properties: {
-      Published: {
+      Synced: {
         type: "date",
         date: {
           start: now.toISOString().split("T")[0],
@@ -231,7 +231,7 @@ export async function genMarkdown(
       for (const p of pages) {
         const createdFileName = await createMarkdownFile(notion, p);
         filesCreated.push(createdFileName);
-        await updatePagePublishDate(notion, p);
+        await updatePageSyncDate(notion, p);
       }
 
       if (res.has_more && res.next_cursor) {

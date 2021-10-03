@@ -1,0 +1,13 @@
+---
+import BlogPostPreview from '../components/BlogPostPreview.astro';
+
+interface MarkdownFrontmatter {
+  published: number;
+}
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('../pages/posts/*.md');
+allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());
+
+---
+   <section>
+          {allPosts.map(p => <BlogPostPreview post={p} />)}
+    </section>
