@@ -66,6 +66,7 @@ var path_1 = __importDefault(require("path"));
 var core = __importStar(require("@actions/core"));
 var yargs_1 = __importDefault(require("yargs/yargs"));
 var helpers_1 = require("yargs/helpers");
+var BLOG_POST_DIR_PATH = path_1.default.join(__dirname, "../../astro/src/pages/posts");
 function updateLog(result) {
     var now = new Date();
     var text = "\n\n#### " + now.toDateString() + " " + now.toTimeString() + "\n" +
@@ -160,7 +161,7 @@ function generateFrontMatter(customFrontMatter) {
 }
 function createMarkdownFile(notion, page) {
     return __awaiter(this, void 0, void 0, function () {
-        var parsedProps, text, page_blocks, _i, _a, block, _b, _c, textBlock, rich, image, caption, url, fileName, dirPath;
+        var parsedProps, text, page_blocks, _i, _a, block, _b, _c, textBlock, rich, image, caption, url, fileName;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -179,14 +180,12 @@ function createMarkdownFile(notion, page) {
                     page_blocks = _d.sent();
                     for (_i = 0, _a = page_blocks.results; _i < _a.length; _i++) {
                         block = _a[_i];
-                        // console.log({ block });
                         switch (block.type) {
                             case "paragraph":
                                 text += "\n";
                                 for (_b = 0, _c = block.paragraph.text; _b < _c.length; _b++) {
                                     textBlock = _c[_b];
                                     rich = parseRichText(textBlock) + " ";
-                                    console.log({ rich: rich });
                                     text += rich;
                                 }
                                 // text += "\n";
@@ -214,11 +213,10 @@ function createMarkdownFile(notion, page) {
                         }
                     }
                     fileName = (parsedProps.Name || "untitled") + ".md";
-                    dirPath = path_1.default.join(__dirname, "../../astro/src/pages/posts");
-                    if (!fs_1.default.existsSync(dirPath)) {
-                        fs_1.default.mkdirSync(dirPath, { recursive: true });
+                    if (!fs_1.default.existsSync(BLOG_POST_DIR_PATH)) {
+                        fs_1.default.mkdirSync(BLOG_POST_DIR_PATH, { recursive: true });
                     }
-                    fs_1.default.writeFileSync(dirPath + "/" + fileName, text);
+                    fs_1.default.writeFileSync(BLOG_POST_DIR_PATH + "/" + fileName, text);
                     return [2 /*return*/, fileName];
             }
         });
@@ -253,6 +251,9 @@ function genMarkdown(notionApiKey, database_id) {
                 case 3:
                     res = _a.sent();
                     pages = res.results;
+                    if (pages.length) {
+                        fs_1.default.rmdirSync(BLOG_POST_DIR_PATH, { recursive: true });
+                    }
                     _i = 0, pages_1 = pages;
                     _a.label = 4;
                 case 4:
