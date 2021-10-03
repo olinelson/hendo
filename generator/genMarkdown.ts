@@ -155,7 +155,6 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
   });
 
   for (const block of page_blocks.results) {
-    // console.log({ block });
     switch (block.type) {
       case "paragraph":
         text += "\n";
