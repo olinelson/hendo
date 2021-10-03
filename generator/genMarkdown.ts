@@ -20,6 +20,8 @@ import * as core from "@actions/core";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 
+const BLOG_POST_DIR_PATH = path.join(__dirname, "../../astro/src/pages/posts");
+
 function updateLog(result: { success: boolean; filesCreated: string[] }) {
   const now = new Date();
   const text =
@@ -189,13 +191,12 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
   }
 
   const fileName = `${parsedProps.Name || "untitled"}.md`;
-  const dirPath = path.join(__dirname, "../../astro/src/pages/posts");
 
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
+  if (!fs.existsSync(BLOG_POST_DIR_PATH)) {
+    fs.mkdirSync(BLOG_POST_DIR_PATH, { recursive: true });
   }
 
-  fs.writeFileSync(`${dirPath}/${fileName}`, text);
+  fs.writeFileSync(`${BLOG_POST_DIR_PATH}/${fileName}`, text);
 
   return fileName;
 }
@@ -227,6 +228,10 @@ export async function genMarkdown(
       });
 
       const pages: Page[] = res.results;
+
+      if (pages.length) {
+        fs.rmdirSync(BLOG_POST_DIR_PATH, { recursive: true });
+      }
 
       for (const p of pages) {
         const createdFileName = await createMarkdownFile(notion, p);
