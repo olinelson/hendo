@@ -153,7 +153,7 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
   const page_blocks = await notion.blocks.children.list({
     block_id: page.id,
   });
-
+  console.log("Hello world");
   for (const block of page_blocks.results) {
     switch (block.type) {
       case "paragraph":
