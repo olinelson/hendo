@@ -159,7 +159,7 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
         text += "\n";
         for (const textBlock of block.paragraph.text) {
           const rich = `${parseRichText(textBlock)} `;
-          console.log({ rich });
+          // console.log({ rich });
           text += rich;
         }
         // text += "\n";
