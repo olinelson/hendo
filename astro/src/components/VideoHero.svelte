@@ -9,14 +9,14 @@
   });
 </script>
 
-<video class="grayscale" bind:this={video} muted autoplay loop {src} />
+<video bind:this={video} muted autoplay loop {src} class="grayscale" />
 
 <style>
   video {
     object-fit: cover;
     height: 100vh;
     width: 100vw;
-    position: sticky;
-    top: 0;
+    /* position: sticky;
+    top: 0; */
   }
 </style>

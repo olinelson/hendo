@@ -8,7 +8,7 @@
 
 // @ts-check
 export default /** @type {import('astro').AstroUserConfig} */ ({
-  renderers: ["@astrojs/renderer-svelte"],
+  renderers: ["@astrojs/renderer-svelte", "@astrojs/renderer-react"],
   buildOptions: {
     site: "https://olinelson.github.io/hendo",
   },

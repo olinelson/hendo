@@ -1,13 +1,22 @@
 ---
-import BlogPostPreview from '../components/BlogPostPreview.astro';
+import BlogPostPreview from '../components/BlogPostPreview.svelte';
 
-interface MarkdownFrontmatter {
-  published: number;
-}
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('../pages/posts/*.md');
+let allPosts = Astro.fetchContent('../pages/posts/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());
-
 ---
-   <section>
-          {allPosts.map(p => <BlogPostPreview post={p} />)}
-    </section>
+<section class="bg-white flex flex-nowrap overflow-x-auto p-8">
+      {allPosts.map(p => 
+        <div class="pr-8">
+          <BlogPostPreview client:visible post={p} />
+        </div>
+      )}
+</section>
+
+<style>
+  section {
+    -webkit-overflow-scrolling: touch;
+  }
+  section div {
+       flex: 0 0 auto;
+  }
+</style>
