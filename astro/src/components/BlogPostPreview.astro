@@ -1,14 +1,27 @@
 ---
+import moment from 'moment'
+
 export interface Props {
-  post: any;
+  post: {
+    layout: string;
+    Name: string;
+    Description: string;
+    Published: string;
+    Author: string;
+    HeroImageDescription: string;
+    url : string
+  }
 }
 
+
+
 const { post } = Astro.props;
+console.log({post})
 ---
-<article class="post-preview text-white">
+<article class="post-preview text-white bg-black p-2">
   <header>
-    <h3 class="publish-date">{post.published}</h3>
-    <a href={post.url}><h1 class="title">{post.title}</h1></a>
+    <h3 class="publish-date">{moment(post.Published).format("dddd, MMMM Do YYYY")}</h3>
+    <a href={post.url}><h1 class="title">{post.Name}</h1></a>
   </header>
   <main>
     <p>{post.description}</p>

@@ -130,9 +130,10 @@ function parseRichText(rt) {
     }
     return "";
 }
-function parseProperties(props, keys) {
+function parseProperties(props, keys, cover) {
     var _a, _b, _c;
     var res = {};
+    res.Cover = (cover === null || cover === void 0 ? void 0 : cover.type) === "external" ? cover.external.url : "";
     for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
         var k = keys_1[_i];
         switch (props[k].type) {
@@ -165,13 +166,7 @@ function createMarkdownFile(notion, page) {
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
-                    parsedProps = parseProperties(page.properties, [
-                        "Name",
-                        "Description",
-                        "Published",
-                        "Author",
-                        "HeroImageDescription",
-                    ]);
+                    parsedProps = parseProperties(page.properties, ["Name", "Description", "Published", "Author", "HeroImageDescription"], page.cover);
                     text = generateFrontMatter(parsedProps);
                     return [4 /*yield*/, notion.blocks.children.list({
                             block_id: page.id,

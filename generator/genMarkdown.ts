@@ -2,10 +2,13 @@
 import { Client } from "@notionhq/client";
 import {
   DatabasesQueryResponse,
+  PageCover,
   PropertyValueMap,
 } from "@notionhq/client/build/src/api-endpoints";
 import {
   DatePropertyValue,
+  ExternalFile,
+  File,
   Page,
   RichText,
   RichTextPropertyValue,
@@ -101,9 +104,12 @@ function parseRichText(rt: RichText): string {
 
 function parseProperties(
   props: PropertyValueMap,
-  keys: string[]
+  keys: string[],
+  cover: ExternalFile | File | null
 ): Record<string, string> {
   const res: Record<string, string> = {};
+
+  res.Cover = cover?.type === "external" ? cover.external.url : "";
 
   for (const k of keys) {
     switch (props[k].type) {
@@ -141,13 +147,11 @@ function generateFrontMatter(
 }
 
 async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
-  const parsedProps = parseProperties(page.properties, [
-    "Name",
-    "Description",
-    "Published",
-    "Author",
-    "HeroImageDescription",
-  ]);
+  const parsedProps = parseProperties(
+    page.properties,
+    ["Name", "Description", "Published", "Author", "HeroImageDescription"],
+    page.cover
+  );
   let text = generateFrontMatter(parsedProps);
 
   const page_blocks = await notion.blocks.children.list({
