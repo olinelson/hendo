@@ -4,7 +4,7 @@ import BlogPostPreview from '../components/BlogPostPreview.svelte';
 let allPosts = Astro.fetchContent('../pages/posts/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());
 ---
-<section class="bg-white flex flex-nowrap overflow-x-auto p-8">
+<section class=" flex flex-nowrap overflow-x-auto p-8">
       {allPosts.map(p => 
         <div class="pr-8">
           <BlogPostPreview client:visible post={p} />

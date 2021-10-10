@@ -11,6 +11,6 @@ const { heroImageSrc} = Astro.props;
 {heroImageSrc && <Hero client:load src={heroImageSrc}/>}
 <Nav client:load/>
 <slot name="hero"/>
-<div >
+<div class="" >
 <slot/>
 </div>
