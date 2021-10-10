@@ -1,17 +1,20 @@
 <script lang="ts">
   export let onClick: (() => void) | undefined = undefined
+  export let fullWidth: boolean = false
+
+  $: containerClasses = `overflow-hidden shadow-lg   ${!fullWidth && "w-80"}`
 </script>
 
 {#if onClick}
   <div
     id="container"
     on:click={onClick}
-    class="max-w-sm overflow-hidden shadow-lg cursor-pointer "
+    class={`${containerClasses} cursor-pointer `}
   >
     <slot />
   </div>
 {:else}
-  <div class="max-w-sm overflow-hidden shadow-lg">
+  <div class={containerClasses}>
     <slot />
   </div>
 {/if}

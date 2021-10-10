@@ -1,7 +1,8 @@
 <script lang="ts">
   import moment from "moment"
-
   import Card from "./Card.svelte"
+
+  export let fullWidth: boolean = false
   export let post
 
   interface Post {
@@ -26,9 +27,9 @@
   }
 </script>
 
-<Card onClick={() => (window.location = url)}>
+<Card {fullWidth} onClick={() => (window.location = url)}>
   <div
-    class="h-96 w-80 bg-cover bg-center text-white"
+    class="h-96 bg-cover bg-center text-white"
     style={`background-image: url('${Cover}');`}
   >
     <div
@@ -37,11 +38,6 @@
       <div class=" text-sm justify-end flex text-gray-200 flex-1">
         {moment(Published).format("Do MMM YYYY")}
       </div>
-      <!-- <img
-    class="w-full h-52 object-cover"
-    src={Cover}
-    alt={HeroImageDescription}
-  /> -->
       <div class="p-2 flex-1">
         <div class=" text-4xl font-semibold ">{Name}</div>
 

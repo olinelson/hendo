@@ -1,29 +1,25 @@
 <script lang="ts">
-  export let src: string;
+  export let src: string
 
-  import "../styles/global.css";
-  import { fade } from "svelte/transition";
-  import { onMount } from "svelte";
+  import "../styles/global.css"
+  import { fade } from "svelte/transition"
+  import { onMount } from "svelte"
 
-  let visible = false;
+  let visible = false
 
   onMount(() => {
-    visible = true;
-  });
+    visible = true
+  })
 </script>
 
 {#if visible && src}
-  <div
-    style="background-image: url('{src}');"
-    transition:fade={{ duration: 500 }}
-    class="hero grayscale"
-  />
+  <div style="background-image: url('{src}');" transition:fade class="hero" />
 {/if}
 
 <style>
   .hero {
     width: 100vw;
-    min-height: 100vh;
+    min-height: 50vh;
     background-size: cover;
   }
 </style>

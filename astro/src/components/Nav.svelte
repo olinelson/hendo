@@ -1,10 +1,9 @@
 <script lang="ts">
-  import "../styles/global.css";
+  import "../styles/global.css"
 </script>
 
-<div
-  class="h-10 px-2 fixed top-0 left-0 right-0 text-xl text-white  z-50 items-center"
-  id="nav"
+<nav
+  class="bg-black  h-10 px-4 fixed top-0 left-0 right-0 text-xl text-white z-50 items-center "
 >
   <div class="">
     <a href="/"> <h4>nick henderson</h4></a>
@@ -16,10 +15,10 @@
     <a href="/music">music</a>
     <a href="/contact">contact</a>
   </div>
-</div>
+</nav>
 
 <style>
-  #nav {
+  nav {
     display: grid;
     grid-template-columns: auto 1fr;
   }
