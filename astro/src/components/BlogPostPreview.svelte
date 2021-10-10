@@ -17,20 +17,37 @@
 
   const { Name, Description, Cover, HeroImageDescription, Published, url } =
     post as Post
+
+  const truncateString = (str, len) => {
+    if (str.length > len) return str.substring(0, len) + "..."
+    else {
+      return str
+    }
+  }
 </script>
 
 <Card onClick={() => (window.location = url)}>
-  <div class=" h-96 w-80">
-    <img
-      class="w-full h-52 object-cover"
-      src={Cover}
-      alt={HeroImageDescription}
-    />
-    <div class="p-2">
-      <div class="text-xl font-semibold">{Name}</div>
-      <div class="text-xs">{moment(Published).format("DD/MM/YY")}</div>
-      <div class="text-sm mt-2 overflow-ellipsis">
-        {Description}
+  <div
+    class="h-96 w-80 bg-cover bg-center text-white"
+    style={`background-image: url('${Cover}');`}
+  >
+    <div
+      class=" w-full h-full bg-cover bg-center bg-black bg-opacity-40  p-2 flex flex-col justify-between"
+    >
+      <div class=" text-sm justify-end flex text-gray-200 flex-1">
+        {moment(Published).format("Do MMM YYYY")}
+      </div>
+      <!-- <img
+    class="w-full h-52 object-cover"
+    src={Cover}
+    alt={HeroImageDescription}
+  /> -->
+      <div class="p-2 flex-1">
+        <div class=" text-4xl font-semibold ">{Name}</div>
+
+        <div class="text-sm my-2 text-gray-200 leading-loose">
+          {truncateString(Description, 150)}
+        </div>
       </div>
     </div>
   </div>

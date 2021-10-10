@@ -6,11 +6,14 @@
 
   let video: HTMLVideoElement | undefined = undefined
   let showVideo = false
+  let scrollY = 0
+  $: showScrollIndicator = scrollY === 0
 
   const onPlay = () => (showVideo = true)
   const childClasses = "absolute top-0  w-full h-full object-cover"
 </script>
 
+<svelte:window bind:scrollY />
 <div
   id="container"
   class="bg-cover bg-center relative h-screen w-screen"
@@ -36,4 +39,12 @@
     alt={description}
     class={`grayscale z-10 ${childClasses}`}
   />
+  {#if showScrollIndicator}
+    <div
+      transition:fade
+      class={`${childClasses} z-30 p-2 flex flex-col justify-end items-center`}
+    >
+      <div class="animate-bounce  text-white text-2xl">↓</div>
+    </div>
+  {/if}
 </div>
