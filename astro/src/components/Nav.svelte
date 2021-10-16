@@ -1,10 +1,19 @@
 <script lang="ts">
-  import "../styles/global.css"
+  import { onMount } from "svelte"
+
+  export let isTransparent: boolean = false
+  let scrollY = 0
+
+  $: navClasses =
+    isTransparent && scrollY < 20
+      ? "text-white bg-transparent"
+      : "text-black bg-white"
+
+  onMount(() => {})
 </script>
 
-<nav
-  class="bg-black  h-10 px-4 fixed top-0 left-0 right-0 text-xl text-white z-50 items-center "
->
+<svelte:window bind:scrollY />
+<nav class={`h-10 px-4 fixed top-0 left-0 right-0 text-xl  z-50 ${navClasses}`}>
   <div class="">
     <a href="/"> <h4>nick henderson</h4></a>
   </div>
@@ -21,6 +30,8 @@
   nav {
     display: grid;
     grid-template-columns: auto 1fr;
+    transition: background-color 300ms linear, color 300ms linear;
+    align-items: center;
   }
   #items {
     justify-self: end;

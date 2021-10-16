@@ -9,7 +9,9 @@
   let scrollY = 0
   $: showScrollIndicator = scrollY === 0
 
-  const onPlay = () => (showVideo = true)
+  const onPlay = () => {
+    showVideo = true
+  }
   const childClasses = "absolute top-0  w-full h-full object-cover"
 </script>
 

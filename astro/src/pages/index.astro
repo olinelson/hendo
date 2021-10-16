@@ -25,7 +25,7 @@ let permalink = 'https://example.com/';
 
   <body >
   <!-- <FlipbookAnimation client:load/> -->
-  <Layout>
+  <Layout client:load isTransparent={true}>
   <VideoHero slot="hero" client:load  videoSrc="https://www.dropbox.com/s/tkg4xjupzlxqzmh/HendloHalfSpeedExport.mp4?raw=1" description="Nick Henderson playing the guitar" imageSrc="/assets/hendo_guitar_clip_poster.png" />
   <LatestBlogPosts client:visible/>
   

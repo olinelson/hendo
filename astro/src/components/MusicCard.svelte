@@ -2,11 +2,11 @@
   import Card from "./Card.svelte"
 
   export let title: string = ""
-  export let src: string = ""
+  export let href: string = ""
   export let imgSrc: string = ""
 </script>
 
-<Card onClick={() => (window.location = src)}>
+<Card {href} fullWidth>
   <div
     class="h-96 bg-cover bg-center text-white"
     style={`background-image: url('${imgSrc}');`}

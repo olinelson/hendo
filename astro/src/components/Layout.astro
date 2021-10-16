@@ -1,16 +1,17 @@
 ---
 export interface Props {
   heroImageSrc?: string;
+  isTransparent?: boolean;
 }
 import Nav from '../components/Nav.svelte'
 import Hero from '../components/Hero.svelte'
 import Footer from '../components/Footer.astro'
 
-const { heroImageSrc} = Astro.props;
+const { heroImageSrc, isTransparent} = Astro.props;
 ---
 
 {heroImageSrc && <Hero client:load src={heroImageSrc}/>}
-<Nav client:load/>
+<Nav isTransparent={isTransparent} client:load/>
 <slot name="hero"/>
 <div id="main">
 <slot/>

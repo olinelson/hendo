@@ -8,7 +8,7 @@ allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.
 <section class="bg-white flex flex-nowrap overflow-x-auto px-8 py-2 pb-8">
       {allPosts.map(p => 
         <div class="pr-8">
-          <BlogPostPreview client:visible post={p} />
+          <BlogPostPreview  post={p} />
         </div>
       )}
 </section>

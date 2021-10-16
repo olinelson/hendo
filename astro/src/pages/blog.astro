@@ -4,19 +4,29 @@ import BlogPostPreview from '../components/BlogPostPreview.svelte'
 let title = 'Example Blog';
 let description = 'The perfect starter for your perfect blog.';
 let permalink = 'https://example.com/';
-import Nav from '../components/Nav.svelte'
 import Layout from '../components/Layout.astro'
 
 let allPosts = Astro.fetchContent('../pages/posts/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());
 ---
-<Layout>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} permalink={permalink} />
+  </head>
+
+  <body >
+<Layout client:load>
 <div class="container mx-auto  w-full max-w-4xl p-8 mt-8">
 {allPosts.map(p => 
 <div class="mt-4">
-<BlogPostPreview post={p} fullWidth={true} />
+<BlogPostPreview  post={p} fullWidth={true} />
 </div>
 )}
 </div>
 </Layout>
+  
+  </body>
+</html>
+
+
 

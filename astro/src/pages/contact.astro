@@ -2,12 +2,12 @@
 import BaseHead from '../components/BaseHead.astro';
 import BlogPostPreview from '../components/BlogPostPreview.svelte'
 let title = 'Example Blog';
-import Layout from '../components/Layout.astro'
+import Layout from '../components/Layout.svelte'
 
 let allPosts = Astro.fetchContent('../pages/posts/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());
 ---
-<Layout>
+<Layout client:load>
 <div class="container mx-auto  w-full max-w-4xl p-8 mt-8">
 <h1>Contact</h1>
 </div>

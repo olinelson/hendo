@@ -27,7 +27,7 @@
   }
 </script>
 
-<Card {fullWidth} onClick={() => (window.location = url)}>
+<Card {fullWidth} href={url}>
   <div
     class="h-96 bg-cover bg-center text-white"
     style={`background-image: url('${Cover}');`}

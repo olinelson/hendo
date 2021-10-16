@@ -1,18 +1,19 @@
 <script lang="ts">
-  export let onClick: (() => void) | undefined = undefined
+  export let href: string | undefined
   export let fullWidth: boolean = false
 
-  $: containerClasses = `overflow-hidden shadow-lg   ${!fullWidth && "w-80"}`
+  const containerClasses = `overflow-hidden shadow-lg ${
+    fullWidth ? "w-full" : "w-80"
+  }
+  `.replace("\n", " ")
 </script>
 
-{#if onClick}
-  <div
-    id="container"
-    on:click={onClick}
-    class={`${containerClasses} cursor-pointer `}
-  >
-    <slot />
-  </div>
+{#if href}
+  <a {href}>
+    <div id="container" class={`${containerClasses} cursor-pointer`}>
+      <slot />
+    </div>
+  </a>
 {:else}
   <div class={containerClasses}>
     <slot />
