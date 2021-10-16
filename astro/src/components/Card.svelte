@@ -30,6 +30,6 @@
     }
   }
   #container:hover {
-    animation: fullScale 0.3s forwards;
+    transform: scale(1.015);
   }
 </style>

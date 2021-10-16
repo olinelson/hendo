@@ -9,12 +9,29 @@ import Footer from '../components/Footer.astro'
 
 const { heroImageSrc, isTransparent} = Astro.props;
 ---
+<div id="mainContainer">
+  <div>
+    {heroImageSrc && <Hero client:load src={heroImageSrc}/>}
+    <Nav isTransparent={isTransparent} client:load/>
+    <slot name="hero"/>
+  </div>
 
-{heroImageSrc && <Hero client:load src={heroImageSrc}/>}
-<Nav isTransparent={isTransparent} client:load/>
-<slot name="hero"/>
-<div id="main">
-<slot/>
-</div>
+  <div id="mainBody">
+    <slot/>
+  </div>
+
 <Footer/>
+</div>
 
+<style>
+  #mainContainer {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+  }
+
+  #mainBody {
+    overflow-x: auto;;
+  }
+</style>
