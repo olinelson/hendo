@@ -15,3 +15,5 @@ And this
 **This is bold**
 
 This is a combination of _italic_ **bold** and _underline_
+
+![Alt text](https://wallup.net/wp-content/uploads/2018/10/07/458379-cat-animal-pet-cats-kitty-cute-sweet-748x561.jpg "a title")

@@ -1,21 +1,42 @@
 ---
 import { Markdown } from 'astro/components';
 import BaseHead from '../components/BaseHead.astro';
-import BlogPost from '../components/BlogPost.astro';
+import BlogPostHeader from '../components/BlogPostHeader.svelte';
+import Layout from '../components/Layout.astro'
+
+
+// layout: "../../layouts/BlogPost.astro"
+// Cover: https://www.dropbox.com/s/6bc0w3brlfniqao/50%20Cycles%201.png?raw=1
+// Name: My first post
+// Description: A great blog about stuff...
+// Published: 2021-04-03
+// Author: Olaf Olafson
+// HeroImageDescription: Some pretty birds
 
 const {content} = Astro.props;
-const {title, description, publishDate, author, heroImage, permalink, alt} = content;
+const {Name, Description, Published, Author, Cover, HeroImageDescription} = content;
 ---
 <html lang={ content.lang || 'en' }>
   <head>
-    <BaseHead title={title} description={description} permalink={permalink} />
+    <BaseHead title={Name} description={Description} permalink="some-permalink" />
     <!-- <link rel="stylesheet" href="/blog.css" /> -->
   </head>
 
   <body>
-    <BlogPost title={title} author={author} heroImage={heroImage} publishDate={publishDate} alt={alt}>
-      <slot />
-    </BlogPost>
+  <Layout heroImageSrc={Cover} isTransparent client:load>
+      <div class="mt-12 container mx-auto px-2">
+      <BlogPostHeader Name={Name} Description={Description} Published={Published}/>
+        <div id="blog-content" class="mt-8">
+        <slot/>
+        </div>
+      </div>
+  </Layout>
   </body>
 </html>
+
+<style global>
+ #blog-content img {
+  margin: 2rem auto;
+}
+</style>
 
