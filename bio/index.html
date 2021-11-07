@@ -1,85 +1,53 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/x-icon" href="/favicon.ico"><title>Example Blog</title><meta name="title" content="Example Blog"><meta name="description" content="The perfect starter for your perfect blog."><meta property="og:type" content="website"><meta property="og:url" content="https://example.com/"><meta property="og:title" content="Example Blog"><meta property="og:description" content="The perfect starter for your perfect blog."><meta property="og:image" content="https://astro.build/social.jpg?v=1"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://example.com/"><meta property="twitter:title" content="Example Blog"><meta property="twitter:description" content="The perfect starter for your perfect blog."><meta property="twitter:image" content="https://astro.build/social.jpg?v=1"><link rel="preconnect" href="https://fonts.gstatic.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=IBM+Plex+Sans:wght@400;700&amp;display=swap"><link rel="stylesheet" href="/_astro/common-Z1WVWWn.css" type="text/css"></head><body><astro-root uid="1kJdya"><nav class="bg-black h-10 px-4 fixed top-0 left-0 right-0 text-xl text-white z-50 items-center  svelte-11ihh3h"><div class=""><a href="/"><h4>nick henderson</h4></a></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/x-icon" href="/favicon.ico"><title>Example Blog</title><meta name="title" content="Example Blog"><meta name="description" content="The perfect starter for your perfect blog."><meta property="og:type" content="website"><meta property="og:url" content="https://example.com/"><meta property="og:title" content="Example Blog"><meta property="og:description" content="The perfect starter for your perfect blog."><meta property="og:image" content="https://astro.build/social.jpg?v=1"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://example.com/"><meta property="twitter:title" content="Example Blog"><meta property="twitter:description" content="The perfect starter for your perfect blog."><meta property="twitter:image" content="https://astro.build/social.jpg?v=1"><link rel="preconnect" href="https://fonts.gstatic.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=IBM+Plex+Sans:wght@400;700&amp;display=swap"><link rel="stylesheet" href="/_astro/common-ZXIVG0.css" type="text/css"></head><body><div id="mainContainer" class="astro-vShUGyng"><div class="astro-vShUGyng"><astro-root uid="pa9pF">
+<nav class="h-10 px-4 fixed top-0 left-0 right-0 text-xl  z-50 text-black bg-white svelte-1w6i3pe"><div class=""><a href="/"><h4>nick henderson</h4></a></div>
 
-  <div id="items" class="justify-self-end svelte-11ihh3h"><a href="/bio">bio</a>
-    <a href="/blog">blog</a>
-    <a href="/music">music</a>
-    <a href="/contact">contact</a></div>
+  <div id="items" class="justify-self-end svelte-1w6i3pe"><a href="/bio" class=" border-b-2 border-black">bio</a>
+    <a href="/blog" class="false">blog</a>
+    <a href="/music" class="false">music</a>
+    <a href="/contact" class="false">contact</a></div>
 </nav></astro-root>
 <script type="module">
 import setup from '/_astro_frontend/hydrate/load.js';
-setup("1kJdya", {}, async () => {
+setup("pa9pF", {}, async () => {
   
   const [{ default: Component }, { default: hydrate }] = await Promise.all([import("/_astro/src/components/Nav.svelte.js"), import("/_snowpack/pkg/@astrojs.renderer-svelte.client.v0.1.1.js")]);
-  return (el, children) => hydrate(el)(Component, {}, children);
+  return (el, children) => hydrate(el)(Component, {
+  "isTransparent": undefined,
+  "currentPath": "/bio"
+}, children);
 
 });
-</script><div id="main"><div class="container mx-auto w-full max-w-4xl p-8 mt-10"><h1 class="text-4xl font-bold">Bio</h1>
-  <img class="sm:float-right w-96 ml-4 mb-4 h-auto" src="/assets/nick_profile.png" alt="nick in front of an airstream trailor">
-  <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-    laudantium culpa est expedita, corporis earum nobis repellat voluptas
-    distinctio commodi laborum temporibus impedit cumque sequi maiores nesciunt,
-    id error minima? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Iusto dicta officia adipisci error eveniet voluptatem animi nemo ratione!
-    Minima nemo nam eos numquam placeat explicabo mollitia dignissimos vero
-    obcaecati neque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Eos aperiam quisquam alias corporis, numquam dolorem distinctio, quia ipsam
-    officiis perferendis nisi odit sapiente tempore ex expedita aliquam nemo!
-    Commodi, molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Repellat quis, officia amet quisquam hic, exercitationem, nam ipsam dicta
-    eveniet itaque saepe aliquam! Cupiditate, placeat voluptates fuga reiciendis
-    perferendis accusantium dolorem! Lorem ipsum dolor sit amet consectetur
-    adipisicing elit. Sequi magni sed nisi, molestiae id placeat illum in illo,
-    sunt modi facere deleniti animi consequuntur eligendi, assumenda ipsam nihil
-    esse nostrum.
+</script></div><div id="mainBody" class="astro-vShUGyng"><div class="container mx-auto w-full max-w-4xl p-8 mt-10"><h1 class="text-4xl font-bold ">Bio</h1>
+  <h4 class="text-lg font-bold mt-4">Have you ever wondered if you can hear dust? Nick has.
+  </h4>
+  <img class="sm:float-right w-96 ml-4 mb-4 h-auto mt-4" src="/assets/nick_profile.png" alt="nick in front of an airstream trailor">
+  <p class="mt-4">Nick Henderson’s world exists in the cracks between minor chords on felt
+    piano and lo-fi tape ambience. On a planet where electro-post-rock-jazz
+    exists; Nick’s love of alternate guitar tunings, introspective synth moods
+    and all things low-end have an ever evolving place in today’s musical
+    landscape.
   </p>
-  <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-    laudantium culpa est expedita, corporis earum nobis repellat voluptas
-    distinctio commodi laborum temporibus impedit cumque sequi maiores nesciunt,
-    id error minima? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Iusto dicta officia adipisci error eveniet voluptatem animi nemo ratione!
-    Minima nemo nam eos numquam placeat explicabo mollitia dignissimos vero
-    obcaecati neque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Eos aperiam quisquam alias corporis, numquam dolorem distinctio, quia ipsam
-    officiis perferendis nisi odit sapiente tempore ex expedita aliquam nemo!
-    Commodi, molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Repellat quis, officia amet quisquam hic, exercitationem, nam ipsam dicta
-    eveniet itaque saepe aliquam! Cupiditate, placeat voluptates fuga reiciendis
-    perferendis accusantium dolorem! Lorem ipsum dolor sit amet consectetur
-    adipisicing elit. Sequi magni sed nisi, molestiae id placeat illum in illo,
-    sunt modi facere deleniti animi consequuntur eligendi, assumenda ipsam nihil
-    esse nostrum.
+  <p class="mt-4">Passionate about ambient electronic music and old jazz records - and
+    obsessed with polyrhythmic death metal and indie-pop songwriting; Nick has a
+    treasure chest of both experience and inspiration. A highly sought after
+    bassist (upright and electric) with a jazz degree from the Sydney
+    Conservatorium of Music, his music creation extends to guitar, singing,
+    synthesizers and recording - with a special penchant for old digital drum
+    machines and even older upright pianos. Have you ever wondered if you can
+    hear dust? Nick has.
   </p>
-  <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-    laudantium culpa est expedita, corporis earum nobis repellat voluptas
-    distinctio commodi laborum temporibus impedit cumque sequi maiores nesciunt,
-    id error minima? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Iusto dicta officia adipisci error eveniet voluptatem animi nemo ratione!
-    Minima nemo nam eos numquam placeat explicabo mollitia dignissimos vero
-    obcaecati neque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Eos aperiam quisquam alias corporis, numquam dolorem distinctio, quia ipsam
-    officiis perferendis nisi odit sapiente tempore ex expedita aliquam nemo!
-    Commodi, molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Repellat quis, officia amet quisquam hic, exercitationem, nam ipsam dicta
-    eveniet itaque saepe aliquam! Cupiditate, placeat voluptates fuga reiciendis
-    perferendis accusantium dolorem! Lorem ipsum dolor sit amet consectetur
-    adipisicing elit. Sequi magni sed nisi, molestiae id placeat illum in illo,
-    sunt modi facere deleniti animi consequuntur eligendi, assumenda ipsam nihil
-    esse nostrum.
+  <p class="mt-4">Like many multi-instrumentalists in a post/post-music world, Nick suffers
+    from multiple-project syndrome. His latest projects include the electronic
+    ’50 cycles’, as well as being one half of the singer-songwriter duo ‘Little
+    Clouds’. He also composes and collaborates with prog-jazzers 'Arcing Wires’
+    and ‘Twirly Bender. Sideman duties include Ellen Kirkwood’s Underwards,
+    Emily-Rose and the Wild Things and the Yutaro Okuda Quintet.
   </p>
-  <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-    laudantium culpa est expedita, corporis earum nobis repellat voluptas
-    distinctio commodi laborum temporibus impedit cumque sequi maiores nesciunt,
-    id error minima? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Iusto dicta officia adipisci error eveniet voluptatem animi nemo ratione!
-    Minima nemo nam eos numquam placeat explicabo mollitia dignissimos vero
-    obcaecati neque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Eos aperiam quisquam alias corporis, numquam dolorem distinctio, quia ipsam
-    officiis perferendis nisi odit sapiente tempore ex expedita aliquam nemo!
-    Commodi, molestiae? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Repellat quis, officia amet quisquam hic, exercitationem, nam ipsam dicta
-    eveniet itaque saepe aliquam! Cupiditate, placeat voluptates fuga reiciendis
-    perferendis accusantium dolorem! Lorem ipsum dolor sit amet consectetur
-    adipisicing elit. Sequi magni sed nisi, molestiae id placeat illum in illo,
-    sunt modi facere deleniti animi consequuntur eligendi, assumenda ipsam nihil
-    esse nostrum.
-  </p></div></div><footer class=" h-56 flex justify-center items-center text-gray-700 text-sm">© Nick Henderson 2021</footer></body></html>
+  <p class="mt-4">His music has seen him tour the USA, Japan, Indonesia, Netherlands, Germany
+    and France, as well as playing alongside Grammy nominated pianist Elio
+    VillaFranca and award winning jazz pianist Mike Nock.
+  </p>
+  <p class="mt-4">Nick hopes one day that you will enjoy his music the way he enjoys listening
+    to his favourite artists; through his Dad’s genuine 70’s vintage B &amp; W
+    speakers.
+  </p></div></div><footer class=" h-56 flex justify-center items-center text-gray-700 text-sm">© Nick Henderson 2021</footer></div></body></html>
