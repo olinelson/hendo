@@ -1,15 +1,31 @@
 ---
+// Component Imports
 import BaseHead from '../components/BaseHead.astro';
-import BlogPostPreview from '../components/BlogPostPreview.svelte'
-let title = 'Example Blog';
-import Layout from '../components/Layout.svelte'
+// import FlipbookAnimation from '../components/FlipbookAnimation.svelte'
+// import Nav from '../components/Nav.svelte'
+import Layout from '../components/Layout.astro'
 
-let allPosts = Astro.fetchContent('../pages/posts/*.md');
-allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());
+
+// Component Script:
+// You can write any JavaScript/TypeScript that you'd like here.
+// It will run during the build, but never in the browser.
+// All variables are available to use in the HTML template below.
+let title = 'Contact';
+let description = 'The perfect starter for your perfect blog.';
+let permalink = 'https://example.com/';
+
 ---
-<Layout client:load>
-<div class="container mx-auto  w-full max-w-4xl p-8 mt-8">
-<h1>Contact</h1>
-</div>
-</Layout>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} permalink={permalink} />
+  </head>
 
+  <body >
+<Layout client:load currentPath="/contact">
+<div class="container mx-auto  w-full max-w-4xl p-8 mt-10">
+  <h1 class="text-4xl font-bold ">contact</h1>
+  </div>
+</Layout>
+  
+  </body>
+</html>

@@ -15,7 +15,7 @@ allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.
   </head>
 
   <body >
-<Layout client:load>
+<Layout client:load currentPath="/blog">
 <div class="container mx-auto  w-full max-w-4xl p-8 mt-8">
 {allPosts.map(p => 
 <div class="mt-4">

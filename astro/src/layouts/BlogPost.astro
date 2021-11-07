@@ -23,7 +23,7 @@ const {Name, Description, Published, Author, Cover, HeroImageDescription} = cont
   </head>
 
   <body>
-  <Layout heroImageSrc={Cover} isTransparent client:load>
+  <Layout heroImageSrc={Cover} client:load>
       <div class="mt-12 container mx-auto px-2">
       <BlogPostHeader Name={Name} Description={Description} Published={Published}/>
         <div id="blog-content" class="mt-8">

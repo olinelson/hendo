@@ -2,14 +2,13 @@
   import { onMount } from "svelte"
 
   export let isTransparent: boolean = false
+  export let currentPath: string = "/"
   let scrollY = 0
 
   $: navClasses =
     isTransparent && scrollY < 20
       ? "text-white bg-transparent"
       : "text-black bg-white"
-
-  onMount(() => {})
 </script>
 
 <svelte:window bind:scrollY />
@@ -19,10 +18,22 @@
   </div>
 
   <div id="items" class=" justify-self-end">
-    <a href="/bio">bio</a>
-    <a href="/blog">blog</a>
-    <a href="/music">music</a>
-    <a href="/contact">contact</a>
+    <a href="/bio" class={currentPath === "/bio" && " border-b-2 border-black"}
+      >bio</a
+    >
+    <a
+      href="/blog"
+      class={currentPath === "/blog" && " border-b-2 border-black"}>blog</a
+    >
+    <a
+      href="/music"
+      class={currentPath === "/music" && " border-b-2 border-black"}>music</a
+    >
+    <a
+      href="/contact"
+      class={currentPath === "/contact" && " border-b-2 border-black"}
+      >contact</a
+    >
   </div>
 </nav>
 
