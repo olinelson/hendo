@@ -1,0 +1,1 @@
+import{z as t}from"./svelte.internal.v3.42.4-3e54b5f1.js";function e(e,{delay:a=0,duration:n=400,easing:o=t}={}){const i=+getComputedStyle(e).opacity;return{delay:a,duration:n,easing:o,css:t=>"opacity: "+t*i}}export{e as f};
