@@ -16,6 +16,7 @@
       title: "50 Cycles",
       width: 1,
       height: 1,
+      youtube: "https://www.youtube.com/channel/UCVmc9nV27XnG5qev5nDoygA",
     },
 
     {
