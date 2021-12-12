@@ -1,10 +1,10 @@
 /* eslint-disable no-case-declarations */
-import { Client } from "@notionhq/client";
+import { Client } from "@notionhq/client"
 import {
   DatabasesQueryResponse,
   PageCover,
   PropertyValueMap,
-} from "@notionhq/client/build/src/api-endpoints";
+} from "@notionhq/client/build/src/api-endpoints"
 import {
   DatePropertyValue,
   ExternalFile,
@@ -14,29 +14,29 @@ import {
   RichTextPropertyValue,
   RichTextText,
   TitlePropertyValue,
-} from "@notionhq/client/build/src/api-types";
-import fs from "fs";
-import path from "path";
-import { GenMarkdownResult } from "./types";
-import * as core from "@actions/core";
+} from "@notionhq/client/build/src/api-types"
+import fs from "fs"
+import path from "path"
+import { GenMarkdownResult } from "./types"
+import * as core from "@actions/core"
 
-import yargs from "yargs/yargs";
-import { hideBin } from "yargs/helpers";
+import yargs from "yargs/yargs"
+import { hideBin } from "yargs/helpers"
 
-const BLOG_POST_DIR_PATH = path.join(__dirname, "../../astro/src/pages/posts");
+const BLOG_POST_DIR_PATH = path.join(__dirname, "../../astro/src/pages/posts")
 
-function updateLog(result: { success: boolean; filesCreated: string[] }) {
-  const now = new Date();
-  const text =
-    `\n\n#### ${now.toDateString()} ${now.toTimeString()}\n` +
-    `Successfully run: ${result.success}\n` +
-    `Files created:\n` +
-    `${result.filesCreated.map((f) => `  - ${f}`).join("\n")}`;
-  fs.appendFileSync("./log.md", text);
-}
+// function updateLog(result: { success: boolean; filesCreated: string[] }) {
+//   const now = new Date()
+//   const text =
+//     `\n\n#### ${now.toDateString()} ${now.toTimeString()}\n` +
+//     `Successfully run: ${result.success}\n` +
+//     `Files created:\n` +
+//     `${result.filesCreated.map((f) => `  - ${f}`).join("\n")}`
+//   fs.appendFileSync("./log.md", text)
+// }
 
 function updatePageSyncDate(notion: Client, p: Page) {
-  const now = new Date();
+  const now = new Date()
   notion.pages.update({
     page_id: p.id,
     archived: false,
@@ -48,58 +48,58 @@ function updatePageSyncDate(notion: Client, p: Page) {
         },
       },
     },
-  });
+  })
 }
 
 function parseRichText(rt: RichText): string {
-  const { type } = rt;
+  const { type } = rt
 
   if (type === "text") {
-    const { annotations, text } = rt as RichTextText;
-    const content = text.content.trim();
-    console.log({ content });
-    const url = text.link?.url;
-    const quote = content.startsWith("^") ? content.substring(0, 1) : undefined;
+    const { annotations, text } = rt as RichTextText
+    const content = text.content.trim()
+    console.log({ content })
+    const url = text.link?.url
+    const quote = content.startsWith("^") ? content.substring(0, 1) : undefined
 
-    if (content.length < 1) return content;
+    if (content.length < 1) return content
 
     if (url) {
-      return `[${content}](${url})`;
+      return `[${content}](${url})`
     }
 
     if (annotations.bold) {
-      return `**${content}**`;
+      return `**${content}**`
     }
 
     if (annotations.italic) {
-      return `*${content}*`;
+      return `*${content}*`
     }
 
     if (annotations.strikethrough) {
-      return `~~${content}~~`;
+      return `~~${content}~~`
     }
 
     if (annotations.underline) {
-      return `__${content}__`;
+      return `__${content}__`
     }
 
     if (annotations.strikethrough) {
-      return `~~${content}~~`;
+      return `~~${content}~~`
     }
 
     if (annotations.code) {
-      const tag = "'`'";
-      return `${tag}${content}${tag}`;
+      const tag = "'`'"
+      return `${tag}${content}${tag}`
     }
 
     if (quote) {
-      return `> ' ${content.substring(2)}`;
+      return `> ' ${content.substring(2)}`
     }
 
-    return content;
+    return content
   }
 
-  return "";
+  return ""
 }
 
 function parseProperties(
@@ -107,43 +107,43 @@ function parseProperties(
   keys: string[],
   cover: ExternalFile | File | null
 ): Record<string, string> {
-  const res: Record<string, string> = {};
+  const res: Record<string, string> = {}
 
-  res.Cover = cover?.type === "external" ? cover.external.url : "";
+  res.Cover = cover?.type === "external" ? cover.external.url : ""
 
   for (const k of keys) {
     switch (props[k].type) {
       case "title":
-        const a = props[k] as TitlePropertyValue;
-        res[k] = a.title[0]?.plain_text || "";
-        break;
+        const a = props[k] as TitlePropertyValue
+        res[k] = a.title[0]?.plain_text || ""
+        break
       case "rich_text":
-        const b = props[k] as RichTextPropertyValue;
-        res[k] = b.rich_text[0]?.plain_text || "";
-        break;
+        const b = props[k] as RichTextPropertyValue
+        res[k] = b.rich_text[0]?.plain_text || ""
+        break
       case "date":
-        const c = props[k] as DatePropertyValue;
-        res[k] = c.date?.start || "";
-        break;
+        const c = props[k] as DatePropertyValue
+        res[k] = c.date?.start || ""
+        break
     }
   }
 
-  return res;
+  return res
 }
 
 function generateFrontMatter(
   customFrontMatter: Record<string, string>
 ): string {
-  let parsed = "";
+  let parsed = ""
   for (const k in customFrontMatter) {
-    parsed += `${k}: ${customFrontMatter[k]}\n`;
+    parsed += `${k}: ${customFrontMatter[k]}\n`
   }
 
   return `---
   layout: "../../layouts/BlogPost.astro"
   ${parsed}
   ---
-`.replace(/ {2}|\r\n|\r/gm, "");
+`.replace(/ {2}|\r\n|\r/gm, "")
 }
 
 async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
@@ -151,55 +151,55 @@ async function createMarkdownFile(notion: Client, page: Page): Promise<string> {
     page.properties,
     ["Name", "Description", "Published", "Author", "HeroImageDescription"],
     page.cover
-  );
-  let text = generateFrontMatter(parsedProps);
+  )
+  let text = generateFrontMatter(parsedProps)
 
   const page_blocks = await notion.blocks.children.list({
     block_id: page.id,
-  });
+  })
   for (const block of page_blocks.results) {
     switch (block.type) {
       case "paragraph":
-        text += "\n";
+        text += "\n"
         for (const textBlock of block.paragraph.text) {
-          const rich = `${parseRichText(textBlock)} `;
-          text += rich;
+          const rich = `${parseRichText(textBlock)} `
+          text += rich
         }
         // text += "\n";
-        break;
+        break
       case "heading_1":
-        text += `\n#${block.heading_1.text[0].plain_text}\n`;
-        break;
+        text += `\n#${block.heading_1.text[0].plain_text}\n`
+        break
       case "heading_2":
-        text += `\n##${block.heading_2.text[0].plain_text}\n`;
-        break;
+        text += `\n##${block.heading_2.text[0].plain_text}\n`
+        break
       case "heading_3":
-        text += `###${block.heading_3.text[0].plain_text}\n`;
-        break;
+        text += `###${block.heading_3.text[0].plain_text}\n`
+        break
       case "bulleted_list_item":
-        text += ` - ${block.bulleted_list_item.text[0].plain_text}\n`;
-        break;
+        text += ` - ${block.bulleted_list_item.text[0].plain_text}\n`
+        break
       case "image":
-        const image = block.image;
-        const caption = (image?.caption && image.caption[0].plain_text) || "";
+        const image = block.image
+        const caption = (image?.caption && image.caption[0].plain_text) || ""
         const url =
-          image.type === "external" ? image.external.url : image.file.url;
-        text += `![${caption}](${url} "${caption}")`;
-        break;
+          image.type === "external" ? image.external.url : image.file.url
+        text += `![${caption}](${url} "${caption}")`
+        break
       default:
-        break;
+        break
     }
   }
 
-  const fileName = `${parsedProps.Name || "untitled"}.md`;
+  const fileName = `${parsedProps.Name || "untitled"}.md`
 
   if (!fs.existsSync(BLOG_POST_DIR_PATH)) {
-    fs.mkdirSync(BLOG_POST_DIR_PATH, { recursive: true });
+    fs.mkdirSync(BLOG_POST_DIR_PATH, { recursive: true })
   }
 
-  fs.writeFileSync(`${BLOG_POST_DIR_PATH}/${fileName}`, text);
+  fs.writeFileSync(`${BLOG_POST_DIR_PATH}/${fileName}`, text)
 
-  return fileName;
+  return fileName
 }
 
 export async function genMarkdown(
@@ -208,12 +208,12 @@ export async function genMarkdown(
 ): Promise<GenMarkdownResult> {
   const notion = new Client({
     auth: notionApiKey,
-  });
+  })
 
-  let hasMore = false;
-  let start_cursor: string | undefined = undefined;
+  let hasMore = false
+  let start_cursor: string | undefined = undefined
 
-  const filesCreated = [];
+  const filesCreated = []
 
   try {
     do {
@@ -226,46 +226,46 @@ export async function genMarkdown(
           },
         },
         start_cursor,
-      });
+      })
 
-      const pages: Page[] = res.results;
+      const pages: Page[] = res.results
 
       if (pages.length) {
-        fs.rmdirSync(BLOG_POST_DIR_PATH, { recursive: true });
+        fs.rmdirSync(BLOG_POST_DIR_PATH, { recursive: true })
       }
 
       for (const p of pages) {
-        const createdFileName = await createMarkdownFile(notion, p);
-        filesCreated.push(createdFileName);
-        await updatePageSyncDate(notion, p);
+        const createdFileName = await createMarkdownFile(notion, p)
+        filesCreated.push(createdFileName)
+        await updatePageSyncDate(notion, p)
       }
 
       if (res.has_more && res.next_cursor) {
-        hasMore = true;
-        start_cursor = res.next_cursor;
+        hasMore = true
+        start_cursor = res.next_cursor
       }
-    } while (hasMore);
+    } while (hasMore)
 
     const result = {
       success: true,
       filesCreated,
-    };
-    updateLog(result);
-    core.debug(JSON.stringify(result, undefined, 2));
-    return result;
+    }
+    // updateLog(result);
+    core.debug(JSON.stringify(result, undefined, 2))
+    return result
   } catch (error) {
     const result = {
       success: false,
       filesCreated,
       error,
-    };
-    updateLog(result);
-    core.error(JSON.stringify(result, undefined, 2));
-    return result;
+    }
+    // updateLog(result);
+    core.error(JSON.stringify(result, undefined, 2))
+    return result
   }
 }
 
-const args = yargs(hideBin(process.argv)).argv;
-const { NOTION_API_KEY, NOTION_DATABASE_ID } = args as any;
+const args = yargs(hideBin(process.argv)).argv
+const { NOTION_API_KEY, NOTION_DATABASE_ID } = args as any
 
-genMarkdown(NOTION_API_KEY, NOTION_DATABASE_ID);
+genMarkdown(NOTION_API_KEY, NOTION_DATABASE_ID)
