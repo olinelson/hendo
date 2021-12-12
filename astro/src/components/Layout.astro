@@ -3,33 +3,43 @@ export interface Props {
   heroImageSrc?: string;
   isTransparent?: boolean;
   currentPath?: string;
+  useContainer?: boolean;
 }
 import Nav from '../components/Nav.svelte'
+import Container from '../components/Container.svelte'
 import Hero from '../components/Hero.svelte'
 import Footer from '../components/Footer.astro'
 
-const { heroImageSrc, isTransparent, currentPath} = Astro.props;
+const { heroImageSrc, isTransparent, currentPath, useContainer} = Astro.props;
 ---
-<div id="mainContainer">
+<body  class="bg-white dark:bg-black h-full">
   <div>
     {heroImageSrc && <Hero client:load src={heroImageSrc}/>}
     <Nav isTransparent={isTransparent} client:load currentPath={currentPath}/>
     <slot name="hero"/>
   </div>
 
-  <div id="mainBody">
+  {!!useContainer ? 
+  <Container id="mainBody">
+    <slot/>
+  </Container> : 
+  <div id="mainBody" class="pt-10 bg-white dark:bg-black text-black dark:text-white">
     <slot/>
   </div>
+  }
+
+
 
 <Footer/>
-</div>
+</body>
 
 <style>
-  #mainContainer {
+  body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr;
-    min-height: calce(100vh - env(safe-area-inset-bottom));
+    height: 100vh;
+    min-height: calc(100vh - env(safe-area-inset-bottom));
   }
 
   #mainBody {

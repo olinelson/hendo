@@ -34,7 +34,7 @@
   ]
 </script>
 
-<div id="container" class="container mx-auto mt-12 gap-4">
+<div id="container" class="gap-4">
   {#each links as { href, imgSrc, title, width, height }}
     <MusicCard {href} {imgSrc} {title} {width} {height} />
   {/each}

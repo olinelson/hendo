@@ -1,20 +1,18 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-let title = 'Example Blog';
-let description = 'The perfect starter for your perfect blog.';
-let permalink = 'https://example.com/';
+let title = 'Nick Henderson - Music';
+let description = 'Composer | Multi-instrumentalist | recording engineer';
+let permalink = 'https://nickhendersonmusic.com/music';
 import Layout from '../components/Layout.astro'
 import Music from '../components/Music.svelte'
 ---
-<html lang="en">
+<html lang="en" class="bg-white dark:bg-black">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
   </head>
 
-  <body >
-  <Layout currentPath="/music"  >
+  <Layout currentPath="/music" useContainer  >
     <Music client:load/>
   </Layout>
   
-  </body>
 </html>

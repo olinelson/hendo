@@ -3,36 +3,35 @@
 
   export let isTransparent: boolean = false
   export let currentPath: string = "/"
+
+  const selectedItemsClasses = "border-b-2 border-black dark:border-white"
+
   let scrollY = 0
 
   $: navClasses =
     isTransparent && scrollY < 20
       ? "text-white bg-transparent"
-      : "text-black bg-white"
+      : "text-black bg-white dark:bg-black dark:text-white"
 </script>
 
 <svelte:window bind:scrollY />
-<nav class={`h-10 px-4 fixed top-0 left-0 right-0 text-xl  z-50 ${navClasses}`}>
+<nav class={`h-10 px-5 fixed top-0 left-0 right-0 text-xl  z-50 ${navClasses}`}>
   <div class="">
     <a href="/"> <h4>nick henderson</h4></a>
   </div>
 
   <div id="items" class=" justify-self-end">
-    <a href="/bio" class={currentPath === "/bio" && " border-b-2 border-black"}
-      >bio</a
+    <a href="/bio" class={currentPath === "/bio" && selectedItemsClasses}>bio</a
     >
-    <a
-      href="/blog"
-      class={currentPath === "/blog" && " border-b-2 border-black"}>blog</a
+    <a href="/blog" class={currentPath === "/blog" && selectedItemsClasses}
+      >blog</a
     >
-    <a
-      href="/music"
-      class={currentPath === "/music" && " border-b-2 border-black"}>music</a
+    <a href="/music" class={currentPath === "/music" && selectedItemsClasses}
+      >music</a
     >
     <a
       href="/contact"
-      class={currentPath === "/contact" && " border-b-2 border-black"}
-      >contact</a
+      class={currentPath === "/contact" && selectedItemsClasses}>contact</a
     >
   </div>
 </nav>
