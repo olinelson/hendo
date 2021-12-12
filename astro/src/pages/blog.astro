@@ -1,10 +1,11 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import BlogPostPreview from '../components/BlogPostPreview.svelte'
+import Layout from '../components/Layout.astro'
+
 let title = 'Nick Henderson - Blog';
 let description = 'Composer | Multi-instrumentalist | recording engineer';
 let permalink = 'https://nickhendersonmusic.com/blog';
-import Layout from '../components/Layout.astro'
 
 let allPosts = Astro.fetchContent('../pages/posts/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.published).valueOf() - new Date(a.published).valueOf());

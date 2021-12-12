@@ -9,13 +9,11 @@ let description = 'Composer | Multi-instrumentalist | recording engineer';
 let permalink = 'https://nickhendersonmusic.com';
 
 ---
-<html lang="en" class="bg-white dark:bg-black">
+<html lang="en">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
-    <!-- <link rel="stylesheet" href="/global.css"> -->
   </head>
 
-  <!-- <FlipbookAnimation client:load/> -->
   <Layout client:load isTransparent={true}>
   <VideoHero slot="hero" client:load  videoSrc="https://www.dropbox.com/s/tkg4xjupzlxqzmh/HendloHalfSpeedExport.mp4?raw=1" description="Nick Henderson playing the guitar" imageSrc="/assets/hendo_guitar_clip_poster.png" />
   <LatestBlogPosts client:visible/>
