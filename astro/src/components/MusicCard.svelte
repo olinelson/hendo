@@ -1,11 +1,15 @@
 <script lang="ts">
   import Card from "./Card.svelte"
+  import InstagramLogo from "./InstagramLogo.svelte"
+  import YoutubeLogo from "./YoutubeLogo.svelte"
 
   export let title: string = ""
   export let href: string = ""
   export let imgSrc: string = ""
   export let width: number = 1
   export let height: number = 1
+  export let instagram: string = ""
+  export let youtube: string = ""
 </script>
 
 <div
@@ -17,8 +21,20 @@
     <div
       class=" w-full h-full bg-cover bg-center bg-black bg-opacity-40  p-2 flex flex-col justify-between"
     >
-      <div class="p-2 flex-1">
+      <div class="p-2 grid gap-2">
         <div class=" text-4xl font-semibold ">{title}</div>
+        <div class="flex gap-2">
+          {#if instagram.length}
+            <a class=" text-sm font-semibold" href={instagram} target="_blank">
+              <InstagramLogo />
+            </a>
+          {/if}
+          {#if youtube.length}
+            <a class=" text-sm font-semibold" href={youtube} target="_blank">
+              <YoutubeLogo />
+            </a>
+          {/if}
+        </div>
       </div>
     </div>
   </a>

@@ -6,13 +6,12 @@ Description: A great blog about stuff...
 Published: 2021-10-03
 Author: Olaf Olafson
 HeroImageDescription: Some pretty birds
-
 ---
 
-This is a paragraph 
+This is a paragraph
 
-And this 
+And this
 
-**This is bold** 
+**This is bold**
 
-This is a combination of *italic* **bold**  and  *underline* 
+This is a combination of _italic_ **bold** and _underline_
