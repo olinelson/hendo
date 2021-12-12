@@ -1,19 +1,19 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Layout from '../components/Layout.astro'
-let title = 'Example Blog';
-let description = 'The perfect starter for your perfect blog.';
-let permalink = 'https://example.com/';
 import Bio from '../components/Bio.svelte'
 
+let title = 'Nick Henderson - Bio';
+let description = 'Composer | Multi-instrumentalist | recording engineer';
+let permalink = 'https://nickhendersonmusic.com/bio';
 ---
-<html lang="en">
+<html lang="en" class="bg-white dark:bg-black">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
   </head>
 
-  <Layout currentPath="/bio" >
-  <Bio/>
+  <Layout client:load currentPath="/bio" useContainer={true} >
+    <Bio/>
   </Layout>
 
 </html>

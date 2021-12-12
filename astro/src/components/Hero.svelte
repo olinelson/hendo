@@ -13,7 +13,11 @@
 </script>
 
 {#if visible && src}
-  <div style="background-image: url('{src}');" transition:fade class="hero" />
+  <div
+    style="background-image: url('{src}');"
+    transition:fade
+    class="hero bg-white dark:bg-black"
+  />
 {/if}
 
 <style>

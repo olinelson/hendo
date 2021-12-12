@@ -1,18 +1,10 @@
 ---
-// Component Imports
 import BaseHead from '../components/BaseHead.astro';
-// import FlipbookAnimation from '../components/FlipbookAnimation.svelte'
-// import Nav from '../components/Nav.svelte'
 import Layout from '../components/Layout.astro'
 
-
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
-let title = 'Contact';
-let description = 'The perfect starter for your perfect blog.';
-let permalink = 'https://example.com/';
+let title = 'Nick Henderson - Contact';
+let description = 'Composer | Multi-instrumentalist | recording engineer';
+let permalink = 'https://nickhendersonmusic.com/contact';
 
 ---
 <html lang="en">
@@ -20,12 +12,10 @@ let permalink = 'https://example.com/';
     <BaseHead title={title} description={description} permalink={permalink} />
   </head>
 
-  <body >
-<Layout client:load currentPath="/contact">
-<div class="container mx-auto  w-full max-w-4xl p-8 mt-10">
-  <h1 class="text-4xl font-bold ">contact</h1>
+<Layout client:load   currentPath="/contact" useContainer>
+  <div class="text-black dark:text-white">
+    <h1 class="text-4xl font-bold ">contact</h1>
   </div>
 </Layout>
   
-  </body>
 </html>

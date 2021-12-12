@@ -2,7 +2,7 @@
   import { fade } from "svelte/transition"
 </script>
 
-<div class="container mx-auto  w-full max-w-4xl p-8 mt-10">
+<div class="text-black dark:text-white">
   <h1 class="text-4xl font-bold ">Bio</h1>
   <h4 class="text-lg font-bold mt-4">
     Have you ever wondered if you can hear dust? Nick has.

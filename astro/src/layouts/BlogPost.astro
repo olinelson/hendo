@@ -1,17 +1,8 @@
 ---
-import { Markdown } from 'astro/components';
 import BaseHead from '../components/BaseHead.astro';
 import BlogPostHeader from '../components/BlogPostHeader.svelte';
 import Layout from '../components/Layout.astro'
 
-
-// layout: "../../layouts/BlogPost.astro"
-// Cover: https://www.dropbox.com/s/6bc0w3brlfniqao/50%20Cycles%201.png?raw=1
-// Name: My first post
-// Description: A great blog about stuff...
-// Published: 2021-04-03
-// Author: Olaf Olafson
-// HeroImageDescription: Some pretty birds
 
 const {content} = Astro.props;
 const {Name, Description, Published, Author, Cover, HeroImageDescription} = content;
@@ -19,7 +10,6 @@ const {Name, Description, Published, Author, Cover, HeroImageDescription} = cont
 <html lang={ content.lang || 'en' }>
   <head>
     <BaseHead title={Name} description={Description} permalink="some-permalink" />
-    <!-- <link rel="stylesheet" href="/blog.css" /> -->
   </head>
 
   <body>

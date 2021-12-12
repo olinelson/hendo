@@ -1,34 +1,22 @@
 ---
-// Component Imports
 import BaseHead from '../components/BaseHead.astro';
 import VideoHero from '../components/VideoHero.svelte'
 import LatestBlogPosts from '../components/LatestBlogPosts.astro'
-// import FlipbookAnimation from '../components/FlipbookAnimation.svelte'
-// import Nav from '../components/Nav.svelte'
 import Layout from '../components/Layout.astro'
 
-
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
-let title = 'Example Blog';
-let description = 'The perfect starter for your perfect blog.';
-let permalink = 'https://example.com/';
+let title = 'Nick Henderson';
+let description = 'Composer | Multi-instrumentalist | recording engineer';
+let permalink = 'https://nickhendersonmusic.com';
 
 ---
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
-    <!-- <link rel="stylesheet" href="/global.css"> -->
   </head>
 
-  <body >
-  <!-- <FlipbookAnimation client:load/> -->
   <Layout client:load isTransparent={true}>
   <VideoHero slot="hero" client:load  videoSrc="https://www.dropbox.com/s/tkg4xjupzlxqzmh/HendloHalfSpeedExport.mp4?raw=1" description="Nick Henderson playing the guitar" imageSrc="/assets/hendo_guitar_clip_poster.png" />
   <LatestBlogPosts client:visible/>
   
   </Layout>
-  </body>
 </html>
