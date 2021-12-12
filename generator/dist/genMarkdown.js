@@ -67,14 +67,15 @@ var core = __importStar(require("@actions/core"));
 var yargs_1 = __importDefault(require("yargs/yargs"));
 var helpers_1 = require("yargs/helpers");
 var BLOG_POST_DIR_PATH = path_1.default.join(__dirname, "../../astro/src/pages/posts");
-function updateLog(result) {
-    var now = new Date();
-    var text = "\n\n#### " + now.toDateString() + " " + now.toTimeString() + "\n" +
-        ("Successfully run: " + result.success + "\n") +
-        "Files created:\n" +
-        ("" + result.filesCreated.map(function (f) { return "  - " + f; }).join("\n"));
-    fs_1.default.appendFileSync("./log.md", text);
-}
+// function updateLog(result: { success: boolean; filesCreated: string[] }) {
+//   const now = new Date()
+//   const text =
+//     `\n\n#### ${now.toDateString()} ${now.toTimeString()}\n` +
+//     `Successfully run: ${result.success}\n` +
+//     `Files created:\n` +
+//     `${result.filesCreated.map((f) => `  - ${f}`).join("\n")}`
+//   fs.appendFileSync("./log.md", text)
+// }
 function updatePageSyncDate(notion, p) {
     var now = new Date();
     notion.pages.update({
@@ -279,7 +280,7 @@ function genMarkdown(notionApiKey, database_id) {
                         success: true,
                         filesCreated: filesCreated,
                     };
-                    updateLog(result);
+                    // updateLog(result);
                     core.debug(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
                 case 11:
@@ -289,7 +290,7 @@ function genMarkdown(notionApiKey, database_id) {
                         filesCreated: filesCreated,
                         error: error_1,
                     };
-                    updateLog(result);
+                    // updateLog(result);
                     core.error(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
                 case 12: return [2 /*return*/];
