@@ -10,7 +10,7 @@
 export default /** @type {import('astro').AstroUserConfig} */ ({
   renderers: ["@astrojs/renderer-svelte"],
   buildOptions: {
-    site: "https://olinelson.github.io/hendo",
+    site: "https://nickhendersonmusic.com",
   },
   devOptions: {
     tailwindConfig: "./tailwind.config.js",

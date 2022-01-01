@@ -250,7 +250,6 @@ export async function genMarkdown(
       success: true,
       filesCreated,
     }
-    // updateLog(result);
     core.debug(JSON.stringify(result, undefined, 2))
     return result
   } catch (error) {
@@ -259,7 +258,6 @@ export async function genMarkdown(
       filesCreated,
       error,
     }
-    // updateLog(result);
     core.error(JSON.stringify(result, undefined, 2))
     return result
   }
