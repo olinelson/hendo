@@ -5,17 +5,17 @@ import Layout from '../components/Layout.astro'
 
 
 const {content} = Astro.props;
-const {Name, Description, Published, Author, Cover, HeroImageDescription} = content;
+const {title, description, published, author, cover, coverDescription} = content;
 ---
 <html lang={ content.lang || 'en' }>
   <head>
-    <BaseHead title={Name} description={Description} permalink="some-permalink" />
+    <BaseHead title={title} description={description} permalink="some-permalink" />
   </head>
 
   <body>
-  <Layout heroImageSrc={Cover} client:load>
-      <div class="mt-12 container mx-auto px-2">
-      <BlogPostHeader Name={Name} Description={Description} Published={Published}/>
+  <Layout heroImageSrc={cover} client:load>
+      <div class="mt-12 container mx-auto px-4">
+      <BlogPostHeader title={title} description={description} published={published}/>
         <div id="blog-content" class="mt-8">
         <slot/>
         </div>
