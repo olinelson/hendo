@@ -34,8 +34,8 @@
     <a href="/blog" class={currentPath === "/blog" && selectedItemsClasses}
       >blog</a
     >
-    <a href="/music" class={currentPath === "/music" && selectedItemsClasses}
-      >music</a
+    <a href="/links" class={currentPath === "/links" && selectedItemsClasses}
+      >links</a
     >
     <a
       href="/contact"
@@ -65,8 +65,8 @@
             class={currentPath === "/blog" && selectedItemsClasses}>blog</a
           >
           <a
-            href="/music"
-            class={currentPath === "/music" && selectedItemsClasses}>music</a
+            href="/links"
+            class={currentPath === "/links" && selectedItemsClasses}>links</a
           >
           <a
             href="/contact"
