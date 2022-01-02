@@ -1,4 +1,6 @@
 {
+  "include": ["**/*"],
+  "exclude": [],
   "moduleResolution": "node",
     "compilerOptions": {
       "module": "ES2015",

@@ -1,7 +1,6 @@
 <script lang="ts">
   export let src: string
 
-  import "../styles/global.css"
   import { fade } from "svelte/transition"
   import { onMount } from "svelte"
 
