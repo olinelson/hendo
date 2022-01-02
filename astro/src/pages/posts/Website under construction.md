@@ -6,7 +6,6 @@ Description: Coming soon
 Published: 2021-10-03
 Author: Nic Henderson
 HeroImageDescription: A crane building things
-
 ---
 
-This website is currently under construction... come back later for more awesomeness 
+This website is currently under construction... come back later for more awesomeness
