@@ -6,17 +6,17 @@
   export let post
 
   interface Post {
-    Cover: string
+    cover: string
     layout: string
-    Name: string
-    Description: string
-    Published: string
-    Author: string
-    HeroImageDescription: string
+    title: string
+    description: string
+    published: string
+    author: string
+    coverDescription: string
     url: string
   }
 
-  const { Name, Description, Cover, HeroImageDescription, Published, url } =
+  const { title, description, cover, coverDescription, published, url } =
     post as Post
 
   const truncateString = (str, len) => {
@@ -30,19 +30,19 @@
 <Card {fullWidth} href={url}>
   <div
     class="h-96 bg-cover bg-center text-white"
-    style={`background-image: url('${Cover}');`}
+    style={`background-image: url('${cover}');`}
   >
     <div
       class=" w-full h-full bg-cover bg-center bg-black bg-opacity-40  p-2 flex flex-col justify-between"
     >
       <div class=" text-sm justify-end flex text-gray-200 flex-1">
-        {moment(Published).format("Do MMM YYYY")}
+        {moment(published).format("Do MMM YYYY")}
       </div>
       <div class="p-2 flex-1">
-        <div class=" text-4xl font-semibold ">{Name}</div>
+        <div class=" text-4xl font-semibold ">{title}</div>
 
         <div class="text-sm my-2 text-gray-200 leading-loose">
-          {truncateString(Description, 150)}
+          {truncateString(description, 150)}
         </div>
       </div>
     </div>
