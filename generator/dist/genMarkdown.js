@@ -103,29 +103,29 @@ function parseRichText(rt) {
         if (content.length < 1)
             return content;
         if (url) {
-            return "[" + content + "](" + url + ")";
+            return "[".concat(content, "](").concat(url, ")");
         }
         if (annotations.bold) {
-            return "**" + content + "**";
+            return "**".concat(content, "**");
         }
         if (annotations.italic) {
-            return "*" + content + "*";
+            return "*".concat(content, "*");
         }
         if (annotations.strikethrough) {
-            return "~~" + content + "~~";
+            return "~~".concat(content, "~~");
         }
         if (annotations.underline) {
-            return "__" + content + "__";
+            return "__".concat(content, "__");
         }
         if (annotations.strikethrough) {
-            return "~~" + content + "~~";
+            return "~~".concat(content, "~~");
         }
         if (annotations.code) {
             var tag = "'`'";
-            return "" + tag + content + tag;
+            return "".concat(tag).concat(content).concat(tag);
         }
         if (quote) {
-            return "> ' " + content.substring(2);
+            return "> ' ".concat(content.substring(2));
         }
         return content;
     }
@@ -157,9 +157,9 @@ function parseProperties(props, keys, cover) {
 function generateFrontMatter(customFrontMatter) {
     var parsed = "";
     for (var k in customFrontMatter) {
-        parsed += k + ": " + customFrontMatter[k] + "\n";
+        parsed += "".concat(k, ": ").concat(customFrontMatter[k], "\n");
     }
-    return ("---\n  layout: \"../../layouts/BlogPost.astro\"\n  " + parsed + "\n  ---\n").replace(/ {2}|\r\n|\r/gm, "");
+    return "---\n  layout: \"../../layouts/BlogPost.astro\"\n  ".concat(parsed, "\n  ---\n").replace(/ {2}|\r\n|\r/gm, "");
 }
 function createMarkdownFile(notion, page) {
     return __awaiter(this, void 0, void 0, function () {
@@ -181,38 +181,38 @@ function createMarkdownFile(notion, page) {
                                 text += "\n";
                                 for (_b = 0, _c = block.paragraph.text; _b < _c.length; _b++) {
                                     textBlock = _c[_b];
-                                    rich = parseRichText(textBlock) + " ";
+                                    rich = "".concat(parseRichText(textBlock), " ");
                                     text += rich;
                                 }
                                 // text += "\n";
                                 break;
                             case "heading_1":
-                                text += "\n#" + block.heading_1.text[0].plain_text + "\n";
+                                text += "\n#".concat(block.heading_1.text[0].plain_text, "\n");
                                 break;
                             case "heading_2":
-                                text += "\n##" + block.heading_2.text[0].plain_text + "\n";
+                                text += "\n##".concat(block.heading_2.text[0].plain_text, "\n");
                                 break;
                             case "heading_3":
-                                text += "###" + block.heading_3.text[0].plain_text + "\n";
+                                text += "###".concat(block.heading_3.text[0].plain_text, "\n");
                                 break;
                             case "bulleted_list_item":
-                                text += " - " + block.bulleted_list_item.text[0].plain_text + "\n";
+                                text += " - ".concat(block.bulleted_list_item.text[0].plain_text, "\n");
                                 break;
                             case "image":
                                 image = block.image;
                                 caption = ((image === null || image === void 0 ? void 0 : image.caption) && image.caption[0].plain_text) || "";
                                 url = image.type === "external" ? image.external.url : image.file.url;
-                                text += "![" + caption + "](" + url + " \"" + caption + "\")";
+                                text += "![".concat(caption, "](").concat(url, " \"").concat(caption, "\")");
                                 break;
                             default:
                                 break;
                         }
                     }
-                    fileName = (parsedProps.Name || "untitled") + ".md";
+                    fileName = "".concat(parsedProps.Name || "untitled", ".md");
                     if (!fs_1.default.existsSync(BLOG_POST_DIR_PATH)) {
                         fs_1.default.mkdirSync(BLOG_POST_DIR_PATH, { recursive: true });
                     }
-                    fs_1.default.writeFileSync(BLOG_POST_DIR_PATH + "/" + fileName, text);
+                    fs_1.default.writeFileSync("".concat(BLOG_POST_DIR_PATH, "/").concat(fileName), text);
                     return [2 /*return*/, fileName];
             }
         });
@@ -280,7 +280,6 @@ function genMarkdown(notionApiKey, database_id) {
                         success: true,
                         filesCreated: filesCreated,
                     };
-                    // updateLog(result);
                     core.debug(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
                 case 11:
@@ -290,7 +289,6 @@ function genMarkdown(notionApiKey, database_id) {
                         filesCreated: filesCreated,
                         error: error_1,
                     };
-                    // updateLog(result);
                     core.error(JSON.stringify(result, undefined, 2));
                     return [2 /*return*/, result];
                 case 12: return [2 /*return*/];
